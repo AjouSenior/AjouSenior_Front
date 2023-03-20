@@ -1,5 +1,6 @@
 import 'package:ajousenior/screen/volunteer_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Volunteer extends StatelessWidget {
   const Volunteer({super.key});
@@ -18,15 +19,21 @@ class Volunteer extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: Colors.black.withOpacity(0.3),
+                offset: const Offset(8, 8))
+          ],
           borderRadius: BorderRadius.circular(10),
-          color: Theme.of(context).colorScheme.onPrimary,
+          color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
         ),
         height: 150,
         width: 200,
-        child: const Text(
-          '봉사',
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 50),
-        ),
+        child: Text('봉사',
+            style: GoogleFonts.notoSansKannada(
+              fontSize: 40,
+              color: Theme.of(context).colorScheme.outline,
+            )),
       ),
     );
   }

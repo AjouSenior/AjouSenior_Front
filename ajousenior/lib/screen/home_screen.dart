@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
       body: const Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
