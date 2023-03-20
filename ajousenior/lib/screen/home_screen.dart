@@ -9,44 +9,45 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 2,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.green,
-          title: const Center(
-            child: Text(
-              "Senior App",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
-            ),
+      appBar: AppBar(
+        elevation: 2,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.green,
+        title: const Center(
+          child: Text(
+            "Senior App",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
           ),
         ),
-        backgroundColor: Colors.white,
-        body: const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Ai(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Community(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Volunteer(),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              )
-            ],
-          ),
-        ));
+      ),
+      backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      body: const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Ai(),
+                SizedBox(
+                  height: 20,
+                ),
+                Community(),
+                SizedBox(
+                  height: 20,
+                ),
+                Volunteer(),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
