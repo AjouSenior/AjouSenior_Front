@@ -6,15 +6,11 @@ class JuniorLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () {
-        return Future(() => false);
-      },
-      child: const Scaffold(
-          body: Column(
+    return const Scaffold(
+      body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [JuniorKakao()],
-      )),
+      ),
     );
   }
 }

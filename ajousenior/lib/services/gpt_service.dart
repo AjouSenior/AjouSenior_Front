@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-String apiKey = "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";
+String apiKey = "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";
 
 class GptService {
   static String baseUrl = "https://api.openai.com";
@@ -26,7 +26,7 @@ class GptService {
     );
 
     if (res.statusCode == 200) {
-      Map<String, dynamic> msg = jsonDecode(res.body);
+      Map<String, dynamic> msg = jsonDecode(utf8.decode(res.bodyBytes));
       msg['choices'][0]['text'];
       return msg['choices'][0]['text'];
     } else {

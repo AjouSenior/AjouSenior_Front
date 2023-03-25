@@ -1,4 +1,5 @@
 import 'package:ajousenior/models/chat_model.dart';
+import 'package:ajousenior/models/tts.dart';
 import 'package:ajousenior/services/gpt_service.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
@@ -60,14 +61,23 @@ class _AiScreenState extends State<AiScreen> {
             setState(() {
               isListening = false;
             });
-            speechToText.stop();
+            await speechToText.stop();
 
-            messages.add(ChatMessage(text: text, type: ChatMessageType.user));
-            var msg = await GptService.sendMessage(text);
+            if (text.isNotEmpty && text != "버튼을 누르면서 말해주세요") {
+              messages.add(ChatMessage(text: text, type: ChatMessageType.user));
+              var msg = await GptService.sendMessage(text);
+              msg = msg.trim();
+              setState(() {
+                messages.add(ChatMessage(text: msg, type: ChatMessageType.bot));
+              });
 
-            setState(() {
-              messages.add(ChatMessage(text: msg, type: ChatMessageType.bot));
-            });
+              Future.delayed(const Duration(milliseconds: 500), () {
+                TextToSpeech.speak(msg);
+              });
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Failed to Process try again")));
+            }
           },
           child: CircleAvatar(
             backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
@@ -134,20 +144,6 @@ class _AiScreenState extends State<AiScreen> {
             const SizedBox(
               height: 12,
             ),
-            Text(
-              "Developed by babadevs",
-              style: GoogleFonts.notoSansKannada(
-                fontSize: 30,
-                color: Theme.of(context).colorScheme.outline,
-              ),
-            ),
-            Expanded(
-              child: Container(
-                  decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.white,
-              )),
-            ),
           ],
         ),
       ),
@@ -161,10 +157,12 @@ Widget chatBubble({required chattext, required ChatMessageType? type}) {
     children: [
       CircleAvatar(
         backgroundColor: Colors.amber.shade50,
-        child: const Icon(
-          Icons.person,
-          color: Color.fromARGB(255, 145, 91, 10),
-        ),
+        child: type == ChatMessageType.bot
+            ? Image.asset('assets/ChatGPTIcon.png')
+            : const Icon(
+                Icons.person,
+                color: Color.fromARGB(255, 145, 91, 10),
+              ),
       ),
       const SizedBox(
         width: 12,
@@ -173,9 +171,11 @@ Widget chatBubble({required chattext, required ChatMessageType? type}) {
         child: Container(
           padding: const EdgeInsets.all(12),
           margin: const EdgeInsets.only(bottom: 8),
-          decoration: const BoxDecoration(
-            color: Color.fromARGB(75, 155, 95, 18),
-            borderRadius: BorderRadius.only(
+          decoration: BoxDecoration(
+            color: type == ChatMessageType.bot
+                ? Colors.blueGrey
+                : const Color.fromARGB(75, 155, 95, 18),
+            borderRadius: const BorderRadius.only(
                 topRight: Radius.circular(12),
                 topLeft: Radius.circular(12),
                 bottomLeft: Radius.circular(12)),
@@ -184,8 +184,11 @@ Widget chatBubble({required chattext, required ChatMessageType? type}) {
             "$chattext",
             style: GoogleFonts.notoSansKannada(
               fontSize: 15,
-              color: const Color.fromARGB(172, 0, 0, 0),
-              fontWeight: FontWeight.w400,
+              color:
+                  type == ChatMessageType.bot ? Colors.black87 : Colors.black45,
+              fontWeight: type == ChatMessageType.bot
+                  ? FontWeight.w600
+                  : FontWeight.w400,
             ),
           ),
         ),
