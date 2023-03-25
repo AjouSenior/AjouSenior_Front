@@ -1,4 +1,4 @@
-import 'package:ajousenior/screen/community_screen.dart';
+import 'package:ajousenior/screen/seniorcommunity_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,4 +1,5 @@
-import 'package:ajousenior/screen/ai_screen.dart';
+
+import 'package:ajousenior/screen/seniorai_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

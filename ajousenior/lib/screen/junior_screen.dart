@@ -1,9 +1,9 @@
-import 'package:ajousenior/widgets/community_widget.dart';
-import 'package:ajousenior/widgets/seniorvolunteer_widget.dart';
+import 'package:ajousenior/widgets/juniorcurrent_widget.dart';
+import 'package:ajousenior/widgets/juniorvolunteer_widget.dart';
 import 'package:flutter/material.dart';
 
-class SeniorScreen extends StatelessWidget {
-  const SeniorScreen({super.key});
+class JuniorScreen extends StatelessWidget {
+  const JuniorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SeniorScreen extends StatelessWidget {
         foregroundColor: Colors.green,
         title: const Center(
           child: Text(
-            "Senior App",
+            "Junior App",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
           ),
         ),
@@ -29,14 +29,14 @@ class SeniorScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                JuniorVolunteer(),
                 SizedBox(
                   height: 20,
                 ),
-                Community(),
+                JuniorCurrent(),
                 SizedBox(
                   height: 20,
                 ),
-                SeniorVolunteer(),
               ],
             ),
             SizedBox(

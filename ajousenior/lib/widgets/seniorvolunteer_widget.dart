@@ -1,9 +1,9 @@
-import 'package:ajousenior/screen/junior_screen.dart';
+import 'package:ajousenior/screen/seniorvolunteer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class JuniorKakao extends StatelessWidget {
-  const JuniorKakao({super.key});
+class SeniorVolunteer extends StatelessWidget {
+  const SeniorVolunteer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class JuniorKakao extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const JuniorScreen(),
+            builder: (context) => const SeniorVolunteerScreen(),
           ),
         );
       },
@@ -29,7 +29,7 @@ class JuniorKakao extends StatelessWidget {
         ),
         height: 150,
         width: 200,
-        child: Text('JuniorKakao',
+        child: Text('봉사',
             style: GoogleFonts.notoSansKannada(
               fontSize: 40,
               color: Theme.of(context).colorScheme.outline,

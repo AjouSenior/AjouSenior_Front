@@ -1,9 +1,9 @@
-import 'package:ajousenior/screen/volunteer_screen.dart';
+import 'package:ajousenior/screen/juniorvolunteer_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Volunteer extends StatelessWidget {
-  const Volunteer({super.key});
+class JuniorVolunteer extends StatelessWidget {
+  const JuniorVolunteer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class Volunteer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const VolunteerScreen(),
+            builder: (context) => const JuniorVolunteerScreen(),
           ),
         );
       },
