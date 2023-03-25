@@ -1,4 +1,4 @@
-import 'package:ajousenior/screen/home_screen.dart';
+import 'package:ajousenior/screen/mainlogin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.notoSansNKoTextTheme(
             Theme.of(context).textTheme,
           )),
-      home: const HomeScreen(),
+      home: const MainLogin(),
     );
   }
 }

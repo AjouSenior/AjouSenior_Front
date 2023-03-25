@@ -3,8 +3,8 @@ import 'package:ajousenior/widgets/community_widget.dart';
 import 'package:ajousenior/widgets/volunteer_widget.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class SeniorScreen extends StatelessWidget {
+  const SeniorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
