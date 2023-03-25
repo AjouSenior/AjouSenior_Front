@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-String apiKey = "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";
+String apiKey = "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";
 
 class GptService {
-  static String baseUrl = "https://api.openai.com/v1/completions";
+  static String baseUrl = "https://api.openai.com";
 
   static Map<String, String> header = {
     'Content-Type': 'application/json',
@@ -13,27 +13,24 @@ class GptService {
   };
 
   static sendMessage(String? message) async {
+    var url = Uri.https("api.openai.com", "/v1/completions");
     var res = await http.post(
-      Uri.parse(baseUrl),
+      url,
       headers: header,
       body: jsonEncode({
         "model": "text-davinci-003",
-        "promt": '$message',
-        "temperature": 0,
-        "max_token": 100,
-        "top_p": 1,
-        "frequency_penalty": 0.0,
-        "presence_penalty": 0.0,
-        "stop": [" Human:", "AI:"]
+        "prompt": message,
+        "max_tokens": 100,
+        "temperature": 0.7
       }),
     );
 
     if (res.statusCode == 200) {
-      var data = jsonDecode(res.body.toString());
-      var msg = data['choices'][0]['text'];
-      return msg;
+      Map<String, dynamic> msg = jsonDecode(res.body);
+      msg['choices'][0]['text'];
+      return msg['choices'][0]['text'];
     } else {
-      print('failed to fetch data');
+      print(res.body);
     }
   }
 }
