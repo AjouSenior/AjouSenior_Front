@@ -13,7 +13,7 @@ class Post {
     //this.comments,
   });
 
-  void AddComment(Comment comment) {
+  void addComment(Comment comment) {
     comments.add(comment);
   }
 }
