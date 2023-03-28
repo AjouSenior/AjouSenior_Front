@@ -9,7 +9,8 @@ class SeniorLoginScreen extends StatelessWidget {
       User user = await UserApi.instance.me();
       print('사용자 정보 요청 성공'
           '\n회원번호: ${user.id}'
-          '\n닉네임: ${user.kakaoAccount?.profile?.nickname}');
+          '\n닉네임: ${user.kakaoAccount?.profile?.nickname}'
+          '\n닉네임: ${user.kakaoAccount?.ageRange}');
     } catch (error) {
       print('사용자 정보 요청 실패 $error');
     }
