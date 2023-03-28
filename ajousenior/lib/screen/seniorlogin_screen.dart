@@ -1,9 +1,16 @@
+import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:ajousenior/widgets/seniorkakao_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
-class SeniorLoginScreen extends StatelessWidget {
+class SeniorLoginScreen extends StatefulWidget {
   const SeniorLoginScreen({super.key});
+
+  @override
+  State<SeniorLoginScreen> createState() => _SeniorLoginScreenState();
+}
+
+class _SeniorLoginScreenState extends State<SeniorLoginScreen> {
   void _get_user_info() async {
     try {
       User user = await UserApi.instance.me();
@@ -11,6 +18,10 @@ class SeniorLoginScreen extends StatelessWidget {
           '\n회원번호: ${user.id}'
           '\n닉네임: ${user.kakaoAccount?.profile?.nickname}'
           '\n닉네임: ${user.kakaoAccount?.ageRange}');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const SeniorScreen()),
+      );
     } catch (error) {
       print('사용자 정보 요청 실패 $error');
     }
