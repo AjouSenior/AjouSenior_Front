@@ -48,7 +48,12 @@ dependencies:
   flutter_dotenv: ^5.0.2
   lottie: ^2.3.0
 
+  kakao_flutter_sdk: ^1.4.1
   
+
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -3,12 +3,13 @@ import 'package:ajousenior/screen/mainlogin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "key.env");
-
   TextToSpeech.initTTS();
+  KakaoSdk.init(nativeAppKey: '8624780acfa7e8b4adedb7d4fc925ff1');
   runApp(const MyApp());
 }
 
