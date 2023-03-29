@@ -1,4 +1,4 @@
-import 'package:ajousenior/data/post.dart';
+//import 'package:ajousenior/data/volunteer_post.dart';
 import 'package:flutter/material.dart';
 
 class PostScreen extends StatelessWidget {
@@ -51,14 +51,25 @@ class PostScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Post newPost = Post(
+                    /*Post newPost = Post(
                       title: titlearea.text,
                       content: contentarea.text,
                       date: '2023-03-26',
                       userID: 'user1',
                     );
-                    entries.insert(0, newPost);
-                    Navigator.pop(context);
+                    posts.insert(0, newPost);
+                    Navigator.pop(context);*/
+                    /*var data = {
+                      "title" : titlearea.text,
+                      "content" : contentarea.text,
+                      "writer" : "user1",
+                      "date": DateFormat.yMMMd().format(DateTime.now()),
+                      };
+                      var body = json.encode(data);
+                      http.Response res = await http.post("$_url/data", 
+                headers: {"Content-Type": "application/json"}, 
+                body: body
+                );*/
                   },
                   child: const Text("post"),
                 ),

@@ -1,6 +1,7 @@
 import 'package:ajousenior/data/post.dart';
 import 'package:ajousenior/screen/community_post_screen.dart';
 import 'package:ajousenior/screen/community_content_screen.dart';
+import 'package:ajousenior/provider/communityprovider.dart';
 import 'package:flutter/material.dart';
 
 class CommunityScreen extends StatefulWidget {
@@ -10,6 +11,24 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
+  List<Post> entries = [];
+  bool isLoading = true;
+  CommunityProviders communityProviders = CommunityProviders();
+
+  Future initPosts() async {
+    entries = await communityProviders.getPost();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initPosts().then((_) {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
