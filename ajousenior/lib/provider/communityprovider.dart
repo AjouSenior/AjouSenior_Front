@@ -7,7 +7,6 @@ class CommunityProviders {
 
   Future<List<Post>> getPost() async {
     List<Post> entries = [];
-    print('ontest');
     final response = await http.get(uri);
     print(response.statusCode);
     if (response.statusCode == 200) {
