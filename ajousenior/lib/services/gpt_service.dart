@@ -3,11 +3,7 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-<<<<<<< HEAD
-String apiKey = "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";
-=======
 String? apiKey = dotenv.env['ApiKey'];
->>>>>>> ee0713436727a405c81bcaf9f5b39285c161d3f2
 
 class GptService {
   static String baseUrl = "https://api.openai.com";
