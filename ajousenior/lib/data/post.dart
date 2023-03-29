@@ -1,9 +1,11 @@
+import 'package:intl/intl.dart';
+
 class Post {
-  final String title;
-  final String content;
-  final String date;
-  final String userID;
-  List<Comment> comments = [];
+  late String title;
+  late String content;
+  late String date;
+  late String userID;
+//  List<Comment> comments = [];
 
   Post({
     required this.title,
@@ -13,11 +15,15 @@ class Post {
     //this.comments,
   });
 
-  void addComment(Comment comment) {
-    comments.add(comment);
+  Post.fromMap(Map<String, dynamic>? map) {
+    title = map?['title'] ?? '';
+    content = map?['content'] ?? '';
+    userID = map?['writer'] ?? '';
+    DateTime dateTime = map?['date'] ?? '';
+    date = DateFormat.yMMMd().format(dateTime);
   }
 }
-
+/*
 class Comment {
   final String userID;
   final String comment;
@@ -63,3 +69,4 @@ final List<Comment> comments1 = [
   Comment(userID: 'user4', comment: 'commentabcdef', date: '2023-03-25'),
   Comment(userID: 'user7', comment: 'commentabcddd', date: '2023-03-26'),
 ];
+*/
