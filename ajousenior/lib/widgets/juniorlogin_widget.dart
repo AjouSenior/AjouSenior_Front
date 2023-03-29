@@ -21,14 +21,14 @@ class JuniorLogin extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                offset: const Offset(8, 8))
+                color: const Color.fromARGB(255, 20, 146, 9).withOpacity(0.3),
+                offset: const Offset(6, 6))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
         ),
         height: 150,
-        width: 200,
+        width: 180,
         child: Text('Junior',
             style: GoogleFonts.notoSansKannada(
               fontSize: 40,

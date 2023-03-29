@@ -15,12 +15,17 @@ class Post {
     //this.comments,
   });
 
+<<<<<<< HEAD
   Post.fromMap(Map<String, dynamic>? map) {
     title = map?['title'] ?? '';
     content = map?['content'] ?? '';
     userID = map?['writer'] ?? '';
     DateTime dateTime = map?['date'] ?? '';
     date = DateFormat.yMMMd().format(dateTime);
+=======
+  void addComment(Comment comment) {
+    comments.add(comment);
+>>>>>>> ee0713436727a405c81bcaf9f5b39285c161d3f2
   }
 }
 /*

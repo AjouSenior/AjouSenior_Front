@@ -4,7 +4,7 @@ class TextToSpeech {
   static FlutterTts tts = FlutterTts();
 
   static initTTS() async {
-    print(await tts.getLanguages);
+    print(await tts.getLanguages); //어떤 언어 사용가능?
 
     tts.setLanguage("en_US"); //ko-KR한국어 사용 경우
     tts.setPitch(1.0); //피치설정
