@@ -15,12 +15,13 @@ class Post {
     //this.comments,
   });
 
-  Post.fromMap(Map<String, dynamic>? map) {
-    title = map?['title'] ?? '';
-    content = map?['content'] ?? '';
-    userID = map?['writer'] ?? '';
-    DateTime dateTime = map?['date'] ?? '';
-    date = DateFormat.yMMMd().format(dateTime);
+  factory Post.fromJson(Map<String, dynamic>? map) {
+    return Post(
+      title: map?['title'] ?? '',
+      content: map?['content'] ?? '',
+      userID: map?['writer'] ?? '',
+      date: DateFormat.yMMMd().format(DateTime.parse(map?['date'] ?? '')),
+    );
   }
 }
 /*

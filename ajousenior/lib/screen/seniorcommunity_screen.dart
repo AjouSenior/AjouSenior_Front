@@ -1,8 +1,9 @@
 import 'package:ajousenior/data/post.dart';
+import 'package:ajousenior/provider/communityprovider.dart';
 import 'package:ajousenior/screen/community_post_screen.dart';
 import 'package:ajousenior/screen/community_content_screen.dart';
-import 'package:ajousenior/provider/communityprovider.dart';
 import 'package:flutter/material.dart';
+//import 'dart:async';
 
 class CommunityScreen extends StatefulWidget {
   const CommunityScreen({super.key});
@@ -11,22 +12,18 @@ class CommunityScreen extends StatefulWidget {
 }
 
 class _CommunityScreenState extends State<CommunityScreen> {
-  List<Post> entries = [];
-  bool isLoading = true;
-  CommunityProviders communityProviders = CommunityProviders();
-
-  Future initPosts() async {
-    entries = await communityProviders.getPost();
-  }
+  /*Future initPosts() async {
+    entries = await CommunityProviders().getPost();
+  }*/
 
   @override
   void initState() {
     super.initState();
-    initPosts().then((_) {
+    /*initPosts().then((_) {
       setState(() {
         isLoading = false;
       });
-    });
+    });*/
   }
 
   @override
@@ -43,47 +40,61 @@ class _CommunityScreenState extends State<CommunityScreen> {
           ),
         ),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ContentScreen(current: entries[index]),
-                ),
-              ).then((value) {});
-            },
-            title: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              height: 120,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    entries[index].title,
-                    style: const TextStyle(
-                      fontSize: 30,
+      body: FutureBuilder<List<Post>>(
+        future: CommunityProviders().getPost(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.separated(
+              padding: const EdgeInsets.all(8),
+              itemCount: snapshot.data!.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ContentScreen(
+                            current: snapshot
+                                .data![snapshot.data!.length - index - 1]),
+                      ),
+                    ).then((value) {});
+                  },
+                  title: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    height: 120,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          snapshot
+                              .data![snapshot.data!.length - index - 1].title,
+                          style: const TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          '${snapshot.data![snapshot.data!.length - index - 1].date} / ${snapshot.data![snapshot.data!.length - index - 1].userID}',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    '${entries[index].date} / ${entries[index].userID}',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return const CircularProgressIndicator();
         },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
