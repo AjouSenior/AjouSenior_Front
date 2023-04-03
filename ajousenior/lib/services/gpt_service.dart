@@ -6,8 +6,6 @@ import 'package:http/http.dart' as http;
 String? apiKey = dotenv.env['ApiKey'];
 
 class GptService {
-  static String baseUrl = "https://api.openai.com";
-
   static Map<String, String> header = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $apiKey'
