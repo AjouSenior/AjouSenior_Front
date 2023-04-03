@@ -16,15 +16,19 @@
         android:label="ajousenior"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-        <activity android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity">
-   <intent-filter android:label="flutter_web_auth">
-        <action android:name="android.intent.action.VIEW" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-        <!-- Redirect URI, "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식 -->
-        <data android:scheme="kakao8624780acfa7e8b4adedb7d4fc925ff1" android:host="oauth"/>
-   </intent-filter>
-</activity>
+ <activity 
+        android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
+        android:exported="true">
+        <intent-filter android:label="flutter_web_auth">
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <!-- "kakao${YOUR_NATIVE_APP_KEY}://oauth" 형식의 앱 실행 스킴 설정 -->
+            <!-- 카카오 로그인 Redirect URI -->
+            <data android:scheme="kakao12250f8b8c7be3e149c3bf627eda1f5c" android:host="oauth"/>
+        </intent-filter>
+    </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"

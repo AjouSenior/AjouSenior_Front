@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "key.env");
   TextToSpeech.initTTS();
-  KakaoSdk.init(nativeAppKey: 'e0b5c48d07fbce9da18c59eadedb5432');
+  KakaoSdk.init(nativeAppKey: '12250f8b8c7be3e149c3bf627eda1f5c');
   runApp(const MyApp());
 }
 
