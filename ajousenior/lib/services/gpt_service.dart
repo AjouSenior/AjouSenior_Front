@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 String apiKey = "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";
