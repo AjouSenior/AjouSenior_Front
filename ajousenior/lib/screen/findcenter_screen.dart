@@ -2,6 +2,7 @@ import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ajousenior/services/findcenter_service.dart';
 import 'package:ajousenior/services/login_service.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/senior_model.dart';
 
@@ -14,6 +15,7 @@ class FindCenterWidget extends StatefulWidget {
 }
 
 class _FindCenterWidgetState extends State<FindCenterWidget> {
+  static final storage = const FlutterSecureStorage();
   final TextEditingController _controller = TextEditingController();
   Map<String, dynamic> _dataList = {};
 
@@ -59,7 +61,7 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                   final specificValue = _dataList['data'][index]['BIZPLC_NM'];
 
                   return GestureDetector(
-                    onTap: () {
+                    onTap: () async {
                       LoginService.sendLogin(
                           widget.data.profile_nickname,
                           widget.data.account_email,
@@ -67,6 +69,10 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                           widget.data.age_range,
                           specificValue,
                           widget.data.birthday);
+                      await storage.write(
+                        key: 'login',
+                        value: widget.data.toString(),
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(
