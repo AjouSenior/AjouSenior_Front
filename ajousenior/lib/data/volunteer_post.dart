@@ -8,10 +8,8 @@ class VolunteerPost {
   final String content;
   final int min;
   final int max;
-  final int members; //for test
-  //int members = 0;
-
-  bool state = true; //true:모집중, false:모집완료
+  //final int members; //for test
+  int members = 0;
 
   VolunteerPost({
     //required this.title,
@@ -21,7 +19,7 @@ class VolunteerPost {
     required this.content,
     required this.min,
     required this.max,
-    required this.members, //for test
+    //required this.members, //for test
   });
   factory VolunteerPost.fromJson(Map<String, dynamic>? map) {
     return VolunteerPost(
@@ -31,7 +29,6 @@ class VolunteerPost {
       date: DateFormat.yMMMd().format(DateTime.parse(map?['date'] ?? '')),
       min: 5,
       max: 30,
-      members: 10,
     );
   }
 }
