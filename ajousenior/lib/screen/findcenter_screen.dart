@@ -15,7 +15,7 @@ class FindCenterWidget extends StatefulWidget {
 }
 
 class _FindCenterWidgetState extends State<FindCenterWidget> {
-  static final storage = const FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
   final TextEditingController _controller = TextEditingController();
   Map<String, dynamic> _dataList = {};
 
@@ -69,6 +69,7 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                           widget.data.age_range,
                           specificValue,
                           widget.data.birthday);
+                      widget.data.seniorcenter = specificValue;
                       await storage.write(
                         key: 'login',
                         value: widget.data.toString(),

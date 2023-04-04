@@ -1,3 +1,4 @@
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:ajousenior/screen/seniorlogin_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +43,9 @@ class _SeniorLoginState extends State<SeniorLogin> {
             ),
           );
         } else {
+          print(userInfo);
+          Senior a = StringTo(userInfo); //사용예시
+          print(a.age_range);
           Navigator.push(
             context,
             MaterialPageRoute(
