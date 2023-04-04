@@ -28,7 +28,7 @@ class VolunteerContentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              current.title,
+              current.content,
               style: const TextStyle(
                 fontSize: 32,
               ),

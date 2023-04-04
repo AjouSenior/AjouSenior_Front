@@ -1,18 +1,19 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:ajousenior/data/post.dart';
+import 'package:ajousenior/data/volunteer_post.dart';
 
-class CommunityProviders {
-  final uri = Uri.parse("http://54.180.8.70:4000/community/readall");
+class VolunteerProviders {
+  final uri = Uri.parse("http://54.180.8.70:4000/talentdonation/readall");
 
-  Future<List<Post>> getPost() async {
-    List<Post> entries = [];
+  Future<List<VolunteerPost>> getPost() async {
+    List<VolunteerPost> entries = [];
     final response = await http.get(uri);
     if (response.statusCode == 200) {
+      print(response.body);
       final responseJson = json.decode(response.body);
       for (var posts in responseJson['data']) {
-        entries.add(Post.fromJson(posts));
+        entries.add(VolunteerPost.fromJson(posts));
       }
       return entries;
     } else {
