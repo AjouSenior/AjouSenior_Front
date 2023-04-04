@@ -17,6 +17,7 @@ class VolunteerPostScreen extends StatelessWidget {
           ),
         ),
       ),
+      body: const Center(),
     );
   }
 }
