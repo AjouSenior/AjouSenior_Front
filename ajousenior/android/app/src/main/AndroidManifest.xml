@@ -16,6 +16,8 @@
         android:label="ajousenior"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCYG4fZRj-RPVn_yU06KLe0ALDxuieLatM"/>
  <activity 
         android:name="com.kakao.sdk.flutter.AuthCodeCustomTabsActivity"
         android:exported="true">

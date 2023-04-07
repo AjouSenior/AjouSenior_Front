@@ -1,4 +1,5 @@
 import 'package:ajousenior/screen/juniorvolunteer_screen.dart';
+import 'package:ajousenior/services/map_sample.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,7 +13,7 @@ class JuniorVolunteer extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const JuniorVolunteerScreen(),
+            builder: (context) => MapScreen(),
           ),
         );
       },
