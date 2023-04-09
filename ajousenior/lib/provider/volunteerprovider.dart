@@ -10,11 +10,11 @@ class VolunteerProviders {
     List<VolunteerPost> entries = [];
     final response = await http.get(uri);
     if (response.statusCode == 200) {
-      print(response.body);
       final responseJson = json.decode(response.body);
       for (var posts in responseJson['data']) {
         entries.add(VolunteerPost.fromJson(posts));
       }
+      print(entries[0].members);
       return entries;
     } else {
       throw Exception('Failed to load post');

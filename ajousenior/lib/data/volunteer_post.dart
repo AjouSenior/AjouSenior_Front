@@ -19,7 +19,7 @@ class VolunteerPost {
     required this.content,
     required this.min,
     required this.max,
-    //required this.members, //for test
+    required this.members, //for test
   });
   factory VolunteerPost.fromJson(Map<String, dynamic>? map) {
     return VolunteerPost(
@@ -28,50 +28,56 @@ class VolunteerPost {
       userID: map?['writer'] ?? '',
       date: DateFormat.yMMMd().format(DateTime.parse(map?['date'] ?? '')),
       min: 5,
-      max: 30,
+      max: map?['maxpeople'] ?? 30,
+      members: map?['currentpeople'] ?? 0,
     );
   }
 }
 
-/*final List<VolunteerPost> entries = [
+final List<VolunteerPost> entries = [
   VolunteerPost(
-    title: '모집1',
+    content: '어디서 뭐할사람 모집합니다',
     place: '수원경로당',
     date: '2023-03-25',
+    userID: 'user1',
     min: 8,
     max: 30,
     members: 0,
   ),
   VolunteerPost(
-    title: '모집2',
+    content: '봉사 인원 모집합니다',
     place: '매탄경로당',
     date: '2023-03-25',
+    userID: 'user2',
     min: 5,
     max: 30,
     members: 30,
   ),
   VolunteerPost(
-    title: '모집3',
+    content: '심심해요 와주세요',
     place: '다른 장소',
     date: '2023-03-25',
+    userID: 'user3',
     min: 3,
     max: 20,
     members: 20,
   ),
   VolunteerPost(
-    title: '모집4',
-    place: '어디',
+    content: '하나둘셋넷다섯여섯일곱여덟',
+    place: '어디경로당',
     date: '2023-03-25',
+    userID: 'user4',
     min: 5,
     max: 25,
     members: 12,
   ),
   VolunteerPost(
-    title: '모집5',
-    place: '어딘가',
+    content: '모집5',
+    place: '어디노인복지센터',
     date: '2023-03-25',
+    userID: 'user5',
     min: 6,
     max: 30,
     members: 15,
   ),
-];*/
+];

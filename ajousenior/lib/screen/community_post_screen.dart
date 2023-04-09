@@ -1,4 +1,4 @@
-//import 'package:ajousenior/data/volunteer_post.dart';
+import 'package:ajousenior/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -28,23 +28,18 @@ class PostScreen extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            TextField(
+            AdvancedTextField(
               controller: titlearea,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Title',
-              ),
+              labelText: 'Title',
+              hintText: 'Title',
             ),
             const SizedBox(
               height: 10,
             ),
-            TextField(
+            AdvancedTextField(
               controller: contentarea,
-              keyboardType: TextInputType.multiline,
+              multiline: true,
               maxLines: 10,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-              ),
             ),
             const SizedBox(
               height: 10,
@@ -54,18 +49,10 @@ class PostScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    /*Post newPost = Post(
-                      title: titlearea.text,
-                      content: contentarea.text,
-                      date: '2023-03-26',
-                      userID: 'user1',
-                    );
-                    posts.insert(0, newPost);
-                    Navigator.pop(context);*/
                     var data = {
                       "title": titlearea.text,
                       "content": contentarea.text,
-                      "writer": "user1",
+                      "writer": 'user1',
                       "date": DateFormat.yMMMd().format(DateTime.now()),
                     };
                     var body = json.encode(data);

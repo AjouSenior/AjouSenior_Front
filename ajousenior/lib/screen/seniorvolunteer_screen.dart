@@ -13,6 +13,11 @@ class SeniorVolunteerScreen extends StatefulWidget {
 
 class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +35,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
         future: VolunteerProviders().getPost(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            ListView.separated(
+            return ListView.separated(
               padding: const EdgeInsets.all(8),
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
@@ -42,7 +47,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                         builder: (context) => VolunteerContentScreen(
                             current: snapshot.data![index]),
                       ),
-                    );
+                    ).then((value) {});
                   },
                   title: Container(
                     padding: const EdgeInsets.symmetric(vertical: 5),
@@ -59,16 +64,23 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                                   height: 5,
                                 ),
                                 Text(
-                                  snapshot.data![index].content,
+                                  snapshot
+                                      .data![snapshot.data!.length - index - 1]
+                                      .content,
                                   style: const TextStyle(
-                                    fontSize: 22,
+                                    fontSize: 20,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
                             OnRecruit(
-                              full: snapshot.data![index].members >=
-                                  snapshot.data![index].max,
+                              full: snapshot
+                                      .data![snapshot.data!.length - index - 1]
+                                      .members >=
+                                  snapshot
+                                      .data![snapshot.data!.length - index - 1]
+                                      .max,
                             ),
                           ],
                         ),
@@ -76,19 +88,21 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                           height: 5,
                         ),
                         Text(
-                          snapshot.data![index].place,
+                          snapshot
+                              .data![snapshot.data!.length - index - 1].place,
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                           ),
                         ),
                         Text(
-                          snapshot.data![index].date,
+                          snapshot
+                              .data![snapshot.data!.length - index - 1].date,
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                           ),
                         ),
                         Text(
-                          '신청 / 최대인원 : ${snapshot.data![index].members} / ${snapshot.data![index].max}',
+                          '신청 / 최대인원 : ${snapshot.data![snapshot.data!.length - index - 1].members} / ${snapshot.data![snapshot.data!.length - index - 1].max}',
                         ),
                       ],
                     ),
@@ -99,7 +113,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                   const Divider(),
             );
           } else if (snapshot.hasError) {
-            Text('${snapshot.error}');
+            return Text('${snapshot.error}');
           }
           return const Center(child: CircularProgressIndicator());
         },
