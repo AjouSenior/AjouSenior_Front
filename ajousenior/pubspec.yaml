@@ -47,7 +47,6 @@ dependencies:
   flutter_tts: ^3.6.3
   flutter_dotenv: ^5.0.2
   lottie: ^2.3.0
-
   kakao_flutter_sdk: ^1.4.1
   flutter_secure_storage: ^8.0.0
   google_maps_flutter: ^2.2.5

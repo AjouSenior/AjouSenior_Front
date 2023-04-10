@@ -1,8 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
-String apiKey = "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";
+String? apiKey = dotenv.env['ApiKey'];
 
 class GptService {
   static Map<String, String> header = {
@@ -18,8 +19,8 @@ class GptService {
       body: jsonEncode({
         "model": "text-davinci-003",
         "prompt": message,
-        "max_tokens": 100,
-        "temperature": 0.2
+        "max_tokens": 200,
+        "temperature": 0.8
       }),
     );
 

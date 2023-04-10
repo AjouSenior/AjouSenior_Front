@@ -13,7 +13,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-const seedColor = Color.fromARGB(255, 132, 39, 238);
+const seedColor = Color.fromARGB(255, 18, 219, 105);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -98,10 +98,11 @@ class _AiScreenState extends State<AiScreen> {
         centerTitle: true,
         elevation: 0.0,
         title: Text(
-          'Voice Assistant',
+          '세나입니다',
           style: GoogleFonts.notoSansKannada(
-            fontSize: 40,
-            color: Theme.of(context).colorScheme.outline,
+            fontSize: 37,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
           ),
         ),
       ),
@@ -114,7 +115,9 @@ class _AiScreenState extends State<AiScreen> {
               text,
               style: GoogleFonts.notoSansKannada(
                 fontSize: 30,
-                color: isListening ? Colors.black : Colors.red,
+                color: isListening
+                    ? Colors.black
+                    : const Color.fromARGB(255, 121, 120, 120),
                 fontWeight: FontWeight.w600,
               ),
             ),
