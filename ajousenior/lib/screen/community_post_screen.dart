@@ -1,14 +1,39 @@
 import 'package:ajousenior/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-class PostScreen extends StatelessWidget {
+class PostScreen extends StatefulWidget {
+  const PostScreen({super.key});
+  @override
+  State<PostScreen> createState() => _PostScreenState();
+}
+
+class _PostScreenState extends State<PostScreen> {
   final titlearea = TextEditingController();
   final contentarea = TextEditingController();
+  static var storage = const FlutterSecureStorage();
+  dynamic userInfo = '';
+  late Senior user;
+  @override
+  void initState() {
+    super.initState();
+    // 비동기로 flutter secure storage 정보를 불러오는 작업
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+      if (userInfo != null) {
+        user = StringTo(userInfo);
+      }
+    });
+  }
 
-  PostScreen({super.key});
+  _asyncMethod() async {
+    // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
+    userInfo = await storage.read(key: 'login');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +77,7 @@ class PostScreen extends StatelessWidget {
                     var data = {
                       "title": titlearea.text,
                       "content": contentarea.text,
-                      "writer": 'user1',
+                      "writer": user.profile_nickname ?? 'defaultUser',
                       "date": DateFormat.yMMMd().format(DateTime.now()),
                     };
                     var body = json.encode(data);

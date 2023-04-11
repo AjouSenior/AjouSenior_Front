@@ -72,6 +72,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                           style: const TextStyle(
                             fontSize: 30,
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(
                           height: 30,
@@ -101,7 +102,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PostScreen(),
+              builder: (context) => const PostScreen(),
             ),
           ).then((value) {
             setState(() {});
