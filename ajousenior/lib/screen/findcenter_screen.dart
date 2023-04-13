@@ -59,10 +59,11 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                 itemCount: _dataList['data']?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   final specificValue = _dataList['data'][index]['BIZPLC_NM'];
-
+                  final lat = _dataList['data'][index]['REFINE_WGS84_LAT'];
+                  final LOGT = _dataList['data'][index]['REFINE_WGS84_LOGT'];
                   return GestureDetector(
                     onTap: () async {
-                      LoginService.sendLogin(
+                      final id = await LoginService.sendLogin(
                           widget.data.profile_nickname,
                           widget.data.account_email,
                           widget.data.gender,
@@ -70,6 +71,7 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                           specificValue,
                           widget.data.birthday);
                       widget.data.seniorcenter = specificValue;
+                      widget.data.id = id;
                       await storage.write(
                         key: 'login',
                         value: widget.data.toString(),

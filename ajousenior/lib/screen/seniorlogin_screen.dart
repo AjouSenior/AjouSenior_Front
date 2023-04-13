@@ -26,7 +26,8 @@ class _SeniorLoginScreenState extends State<SeniorLoginScreen> {
           user.kakaoAccount?.gender.toString(),
           user.kakaoAccount?.ageRange.toString(),
           '',
-          user.kakaoAccount?.birthday);
+          user.kakaoAccount?.birthday,
+          '');
       Navigator.push(
           context,
           MaterialPageRoute(

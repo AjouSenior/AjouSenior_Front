@@ -19,6 +19,7 @@ class LoginService {
     if (res.statusCode == 200) {
       var msg = jsonDecode((res.body));
       print(msg);
+      return msg['data']['_id'];
     } else {
       print(res.body);
       throw (e) {

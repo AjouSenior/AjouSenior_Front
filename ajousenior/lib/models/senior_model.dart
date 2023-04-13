@@ -6,8 +6,9 @@ class Senior {
   String? age_range;
   String? seniorcenter;
   String? birthday;
+  String? id;
   Senior(this.profile_nickname, this.account_email, this.gender, this.age_range,
-      this.seniorcenter, this.birthday);
+      this.seniorcenter, this.birthday, this.id);
   String split = "//";
   @override
   String toString() {
@@ -22,12 +23,14 @@ class Senior {
         split +
         seniorcenter! +
         split +
-        birthday!;
+        birthday! +
+        split +
+        id!;
   }
 }
 
 Senior StringTo(String a) {
   List<String> result = a.split('//');
-  return Senior(
-      result[0], result[1], result[2], result[3], result[4], result[5]);
+  return Senior(result[0], result[1], result[2], result[3], result[4],
+      result[5], result[6]);
 }
