@@ -18,59 +18,73 @@ class CurrentScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: testData.volunteerList.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Container(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              height: 130,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    testData
-                        .volunteerList[
-                            testData.volunteerList.length - index - 1]
-                        .place,
-                    style: const TextStyle(
-                      fontSize: 20,
-                    ),
-                    overflow: TextOverflow.ellipsis,
+      body: CurrentList(),
+    );
+  }
+}
+
+class CurrentList extends StatelessWidget {
+  final List<Color> colorList = [
+    const Color.fromARGB(147, 94, 222, 102),
+    const Color.fromARGB(200, 76, 181, 222),
+    const Color.fromARGB(176, 218, 113, 113),
+    const Color.fromARGB(200, 174, 124, 207),
+  ];
+  CurrentList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      padding: const EdgeInsets.all(8),
+      itemCount: testData.volunteerList.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Container(
+            padding: const EdgeInsets.symmetric(vertical: 5),
+            height: 130,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  testData
+                      .volunteerList[testData.volunteerList.length - index - 1]
+                      .place,
+                  style: const TextStyle(
+                    fontSize: 20,
                   ),
-                  const SizedBox(
-                    height: 5,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  testData
+                      .volunteerList[testData.volunteerList.length - index - 1]
+                      .userID,
+                ),
+                Text(
+                  testData
+                      .volunteerList[testData.volunteerList.length - index - 1]
+                      .date,
+                ),
+                Text(
+                  testData
+                      .volunteerList[testData.volunteerList.length - index - 1]
+                      .content,
+                  style: TextStyle(
+                    color: Colors.black.withOpacity(0.5),
                   ),
-                  Text(
-                    testData
-                        .volunteerList[
-                            testData.volunteerList.length - index - 1]
-                        .userID,
-                  ),
-                  Text(
-                    testData
-                        .volunteerList[
-                            testData.volunteerList.length - index - 1]
-                        .date,
-                  ),
-                  Text(
-                    testData
-                        .volunteerList[
-                            testData.volunteerList.length - index - 1]
-                        .content,
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                ],
-              ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
             ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-      ),
+          ),
+        );
+      },
+      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

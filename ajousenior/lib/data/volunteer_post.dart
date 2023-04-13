@@ -36,7 +36,7 @@ class VolunteerPost {
 
 final List<VolunteerPost> entries = [
   VolunteerPost(
-    content: '어디서 뭐할사람 모집합니다',
+    content: '어디서 뭐할사람 모집합니다 1111111111111111111111111111111111',
     place: '수원경로당',
     date: '2023-03-25',
     userID: 'user1',

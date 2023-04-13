@@ -93,6 +93,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                           style: TextStyle(
                             color: Colors.black.withOpacity(0.5),
                           ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           snapshot

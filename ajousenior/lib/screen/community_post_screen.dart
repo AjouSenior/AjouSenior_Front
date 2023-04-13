@@ -1,15 +1,13 @@
 import 'package:ajousenior/widgets/textfield_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
-import 'package:ajousenior/models/senior_model.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
-  static const storage = FlutterSecureStorage();
-
   @override
   State<PostScreen> createState() => _PostScreenState();
 }
@@ -17,16 +15,18 @@ class PostScreen extends StatefulWidget {
 class _PostScreenState extends State<PostScreen> {
   final titlearea = TextEditingController();
   final contentarea = TextEditingController();
-
-  static const storage = FlutterSecureStorage();
+  static var storage = const FlutterSecureStorage();
   dynamic userInfo = '';
-  // storage에 있는 유저 정보를 저장
+  late Senior user;
   @override
   void initState() {
     super.initState();
     // 비동기로 flutter secure storage 정보를 불러오는 작업
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _asyncMethod();
+      if (userInfo != null) {
+        user = StringTo(userInfo);
+      }
     });
   }
 

@@ -17,60 +17,6 @@ class JuniorVolunteerScreen extends StatelessWidget {
           ),
         ),
       ),
-      /*body: ListView.separated(
-        padding: const EdgeInsets.all(8),
-        itemCount: 1,
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            title: Container(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              height: 130,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            '',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    '',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                  Text(
-                    '',
-                    style: TextStyle(
-                      color: Colors.black.withOpacity(0.5),
-                    ),
-                  ),
-                  const Text(
-                    '신청 / 최대인원 : ',
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => const Divider(),
-      ),*/
     );
   }
 }
