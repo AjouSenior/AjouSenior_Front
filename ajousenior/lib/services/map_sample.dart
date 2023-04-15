@@ -24,65 +24,31 @@ class _MapScreenState extends State<MapScreen> {
     try {
       final list = await GetVolListService().getVolList();
       setState(() {
-        locations = list;
+        locations = list.cast<Map<String, dynamic>>();
+        print("성공");
       });
-    } catch (e) {
-      // 예외 처리 코드를 추가합니다.
-    }
-  }
-
-  void _showModalBottomSheet(
-      BuildContext context, String name, String description) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return SizedBox(
-          height: 200,
-          child: Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    name,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    description,
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
+    } catch (e) {}
   }
 
   Set<Marker> getMarkers() {
-    return locations.map((location) {
-      final LatLng position = LatLng(location['lat'], location['lng']);
-      return Marker(
-        markerId: MarkerId(location['id'].toString()),
-        position: position,
-        infoWindow: InfoWindow(
-          title: location['name'],
-          snippet: location['description'],
+    Set<Marker> markers = {};
+
+    for (Map<String, dynamic> location in locations) {
+      final LatLng position = LatLng(double.parse(location['latitude']),
+          double.parse(location['longitude']));
+      print("마커 생성");
+      markers.add(
+        Marker(
+          markerId: MarkerId(location['seniorcenter']),
+          position: position,
+          infoWindow: InfoWindow(
+            title: location['seniorcenter'],
+            snippet: location['content'],
+          ),
         ),
-        onTap: () {
-          _showModalBottomSheet(
-              context, location['name'], location['description']);
-        },
       );
-    }).toSet();
+    }
+    return markers;
   }
 
   @override
@@ -113,7 +79,7 @@ class _MapScreenState extends State<MapScreen> {
           mapController = controller;
         },
         initialCameraPosition: const CameraPosition(
-          target: LatLng(37.546926, 126.911838),
+          target: LatLng(37.283653, 127.045009),
           zoom: 14,
         ),
         markers: getMarkers(),
