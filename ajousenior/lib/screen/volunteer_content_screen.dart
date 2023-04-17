@@ -37,7 +37,7 @@ class VolunteerContentScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              '${current.min} / ${current.max}',
+              '${current.members} / ${current.max}',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.5),
               ),

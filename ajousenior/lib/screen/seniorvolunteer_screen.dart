@@ -45,7 +45,8 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => VolunteerContentScreen(
-                            current: snapshot.data![index]),
+                            current: snapshot
+                                .data![snapshot.data!.length - index - 1]),
                       ),
                     ).then((value) {});
                   },
@@ -57,23 +58,31 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Column(
-                              children: [
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  snapshot
-                                      .data![snapshot.data!.length - index - 1]
-                                      .content,
-                                  style: const TextStyle(
-                                    fontSize: 20,
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 5,
                                   ),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ],
+                                  Container(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      snapshot
+                                          .data![
+                                              snapshot.data!.length - index - 1]
+                                          .content,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
+                            const SizedBox(width: 10),
                             OnRecruit(
                               full: snapshot
                                       .data![snapshot.data!.length - index - 1]
