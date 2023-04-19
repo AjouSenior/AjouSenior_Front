@@ -79,7 +79,7 @@ class _PostScreenState extends State<PostScreen> {
                     var data = {
                       "title": titlearea.text,
                       "content": contentarea.text,
-                      "writer": a.profile_nickname,
+                      "writer": a.profile_nickname ?? 'x',
                       "date": DateFormat.yMMMd().format(DateTime.now()),
                     };
                     var body = json.encode(data);

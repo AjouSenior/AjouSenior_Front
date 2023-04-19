@@ -35,8 +35,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
         future: VolunteerProviders().getPost(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.separated(
-              padding: const EdgeInsets.all(8),
+            return ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
@@ -51,76 +50,109 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                     ).then((value) {});
                   },
                   title: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.symmetric(vertical: 2),
                     height: 130,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Expanded(
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
+                    width: double.maxFinite,
+                    child: Card(
+                      elevation: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            left: BorderSide(
+                              width: 9.0,
+                              color: snapshot
+                                          .data![
+                                              snapshot.data!.length - index - 1]
+                                          .members >=
                                       snapshot
                                           .data![
                                               snapshot.data!.length - index - 1]
-                                          .content,
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                      ),
-                                      overflow: TextOverflow.ellipsis,
+                                          .max
+                                  ? Colors.red
+                                  : Colors.green,
+                            ),
+                          ),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(7),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            snapshot
+                                                .data![snapshot.data!.length -
+                                                    index -
+                                                    1]
+                                                .content,
+                                            style: const TextStyle(
+                                              fontSize: 20,
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  )
+                                  ),
+                                  const SizedBox(width: 10),
+                                  OnRecruit(
+                                    full: snapshot
+                                            .data![snapshot.data!.length -
+                                                index -
+                                                1]
+                                            .members >=
+                                        snapshot
+                                            .data![snapshot.data!.length -
+                                                index -
+                                                1]
+                                            .max,
+                                  ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(width: 10),
-                            OnRecruit(
-                              full: snapshot
-                                      .data![snapshot.data!.length - index - 1]
-                                      .members >=
-                                  snapshot
-                                      .data![snapshot.data!.length - index - 1]
-                                      .max,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          snapshot
-                              .data![snapshot.data!.length - index - 1].place,
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.5),
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          snapshot
-                              .data![snapshot.data!.length - index - 1].date,
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(0.5),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                snapshot
+                                    .data![snapshot.data!.length - index - 1]
+                                    .place,
+                                style: TextStyle(
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                snapshot
+                                    .data![snapshot.data!.length - index - 1]
+                                    .date,
+                                style: TextStyle(
+                                  color: Colors.black.withOpacity(0.5),
+                                ),
+                              ),
+                              Text(
+                                '신청 / 최대인원 : ${snapshot.data![snapshot.data!.length - index - 1].members} / ${snapshot.data![snapshot.data!.length - index - 1].max}',
+                              ),
+                            ],
                           ),
                         ),
-                        Text(
-                          '신청 / 최대인원 : ${snapshot.data![snapshot.data!.length - index - 1].members} / ${snapshot.data![snapshot.data!.length - index - 1].max}',
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 );
               },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(),
             );
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');

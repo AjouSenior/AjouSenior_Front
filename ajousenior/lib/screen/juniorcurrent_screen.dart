@@ -39,10 +39,6 @@ class CurrentList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      /*padding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 3,
-      ),*/
       itemCount: testData.volunteerList.length,
       itemBuilder: (BuildContext context, int index) {
         return ListTile(
@@ -56,10 +52,11 @@ class CurrentList extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border(
                     left: BorderSide(
-                        width: 9.0, color: colorList[index % colorList.length]),
+                      width: 9.0,
+                      color: colorList[index % colorList.length],
+                    ),
                   ),
                   color: Colors.white,
-                  //borderRadius: BorderRadius.circular(1),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(7),
