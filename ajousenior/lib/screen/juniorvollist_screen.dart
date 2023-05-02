@@ -1,7 +1,7 @@
-import 'package:ajousenior/services/map_sample.dart';
 import 'package:ajousenior/services/volunteerlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ajousenior/screen/map_sample.dart';
 import '../models/senior_model.dart';
 import '../services/junior_postvolunteer.dart';
 
@@ -75,9 +75,7 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const MapScreen(),
-                ),
+                MaterialPageRoute(builder: (context) => const MapScreen()),
               );
             },
           ),
@@ -112,10 +110,6 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
                           if (apply == true) {
                             JuniorPostVolunteer.sendVolunteer(location['_id'],
                                 a.id, location['currentpeople'].toString());
-                            print(location['donationid']);
-                            print(a.id);
-                            print(location['currentpeople'].toString());
-                            print('신청되었습니다.');
                           }
                         },
                         child: const Text('신청'),
