@@ -1,4 +1,5 @@
 import 'package:ajousenior/models/senior_model.dart';
+import 'package:ajousenior/widgets/hidelogin_widget.dart';
 import 'package:ajousenior/widgets/seniorkakao_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -44,6 +45,7 @@ class _SeniorLoginScreenState extends State<SeniorLoginScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const SeniorKakao(),
+          const LoginWidget(),
           ElevatedButton(
               child: const Text('카카오로그인'),
               onPressed: () async {

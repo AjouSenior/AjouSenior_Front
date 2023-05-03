@@ -20,6 +20,7 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
   _asyncMethod() async {
     // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
     userInfo = await storage.read(key: 'login');
+    print(userInfo + "를 읽어왔습니다");
   }
 
   List<Map<String, dynamic>> locations = [];
@@ -106,6 +107,7 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
                       ElevatedButton(
                         onPressed: () async {
                           Senior a = StringTo(userInfo);
+                          print(userInfo);
                           final apply = await _showApplyDialog();
                           if (apply == true) {
                             JuniorPostVolunteer.sendVolunteer(location['_id'],
