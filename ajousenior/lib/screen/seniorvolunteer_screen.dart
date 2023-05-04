@@ -167,7 +167,9 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
             MaterialPageRoute(
               builder: (context) => const VolunteerPostScreen(),
             ),
-          );
+          ).then((value) {
+            setState(() {});
+          });
         },
         tooltip: 'Post',
         child: const Icon(Icons.add),
