@@ -1,53 +1,54 @@
-import 'package:ajousenior/widgets/community_widget.dart';
-import 'package:ajousenior/widgets/logout_widget.dart';
-import 'package:ajousenior/widgets/seniorai_widget.dart';
-import 'package:ajousenior/widgets/seniorvolunteer_widget.dart';
+import 'package:ajousenior/screen/seniorhome_screen.dart';
+import 'package:ajousenior/screen/myprofile_screen.dart';
+import 'package:ajousenior/screen/temp_screen.dart';
 import 'package:flutter/material.dart';
 
-class SeniorScreen extends StatelessWidget {
+class SeniorScreen extends StatefulWidget {
   const SeniorScreen({super.key});
+
+  @override
+  State<SeniorScreen> createState() => _SeniorScreenState();
+}
+
+class _SeniorScreenState extends State<SeniorScreen> {
+  int _currentIndex = 1;
+
+  final List<Widget> _pages = [
+    const TempScreen(),
+    const SeniorHomeScreen(),
+    const MyProfileScreen(),
+  ];
+
+  void _onTapped(index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 2,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.green,
-        title: const Center(
-          child: Text(
-            "Senior App",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
-          ),
-        ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Ai(),
-                SizedBox(
-                  height: 20,
-                ),
-                Community(),
-                SizedBox(
-                  height: 20,
-                ),
-                SeniorVolunteer(),
-              ],
-            ),
-            LogOut(),
-            SizedBox(
-              height: 50,
-            )
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Temp',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
       ),
     );
   }
