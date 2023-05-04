@@ -37,7 +37,6 @@ class _PostScreenState extends State<PostScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Senior a;
     return Scaffold(
       appBar: AppBar(
         elevation: 2,
@@ -75,11 +74,11 @@ class _PostScreenState extends State<PostScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () async {
-                    Senior a = StringTo(userInfo);
+                    user = StringTo(userInfo);
                     var data = {
                       "title": titlearea.text,
                       "content": contentarea.text,
-                      "writer": a.profile_nickname ?? 'x',
+                      "writer": user.profile_nickname,
                       "date": DateFormat.yMMMd().format(DateTime.now()),
                     };
                     var body = json.encode(data);

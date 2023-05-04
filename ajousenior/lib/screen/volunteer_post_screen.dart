@@ -20,6 +20,7 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
   DateTime date = DateTime.now();
   static const storage = FlutterSecureStorage();
   dynamic userInfo = '';
+  late Senior user;
   // storage에 있는 유저 정보를 저장
   @override
   void initState() {
@@ -139,10 +140,10 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
                     );
                     posts.insert(0, newPost);
                     Navigator.pop(context);*/
-                    Senior a = StringTo(userInfo);
+                    user = StringTo(userInfo);
                     var data = {
-                      "seniorcenter": a.seniorcenter,
-                      "writer": a.profile_nickname,
+                      "seniorcenter": user.seniorcenter,
+                      "writer": user.profile_nickname,
                       "date": DateFormat.yMMMd().format(date),
                       "content": contentarea.text,
                       "maxpeople": int.tryParse(memberarea.text),
