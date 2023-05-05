@@ -1,5 +1,4 @@
 import 'package:ajousenior/widgets/community_widget.dart';
-import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:ajousenior/widgets/seniorai_widget.dart';
 import 'package:ajousenior/widgets/seniorvolunteer_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +23,7 @@ class SeniorHomeScreen extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -42,7 +42,6 @@ class SeniorHomeScreen extends StatelessWidget {
                 SeniorVolunteer(),
               ],
             ),
-            LogOut(),
             SizedBox(
               height: 50,
             ),

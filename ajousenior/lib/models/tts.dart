@@ -6,10 +6,10 @@ class TextToSpeech {
   static initTTS() async {
     print(await tts.getLanguages); //어떤 언어 사용가능?
 
-    tts.setLanguage("en_US"); //ko-KR한국어 사용 경우
-    tts.setPitch(1.0); //피치설정
-    tts.setSpeechRate(0.4); //말하는 속도
-    tts.setVolume(0.5);
+    tts.setLanguage("ko-KR"); //ko-KR한국어 사용 경우
+    tts.setPitch(0.8); //피치설정
+    tts.setSpeechRate(0.5); //말하는 속도
+    tts.setVolume(1);
   }
 
   static speak(String text) async {

@@ -24,7 +24,7 @@ class _AiScreenState extends State<AiScreen> {
 
   scrollMethod() {
     scrollController.animateTo(scrollController.position.maxScrollExtent,
-        duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
+        duration: const Duration(milliseconds: 5000), curve: Curves.easeOut);
   }
 
   @override

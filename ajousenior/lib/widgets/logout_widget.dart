@@ -10,7 +10,7 @@ class LogOut extends StatefulWidget {
 }
 
 class _LogOutState extends State<LogOut> {
-  static final storage = const FlutterSecureStorage();
+  static const storage = FlutterSecureStorage();
 
   logout() async {
     await storage.delete(key: 'login');
@@ -28,7 +28,7 @@ class _LogOutState extends State<LogOut> {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.3),
-                offset: const Offset(8, 8))
+                offset: const Offset(3, 3))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),

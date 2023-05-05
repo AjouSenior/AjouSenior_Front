@@ -22,7 +22,7 @@ class Community extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.3),
-                offset: const Offset(8, 8))
+                offset: const Offset(3, 3))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),

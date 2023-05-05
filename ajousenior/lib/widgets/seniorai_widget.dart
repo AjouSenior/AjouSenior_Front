@@ -1,4 +1,3 @@
-
 import 'package:ajousenior/screen/seniorai_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +22,7 @@ class Ai extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.3),
-                offset: const Offset(8, 8))
+                offset: const Offset(3, 3))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),

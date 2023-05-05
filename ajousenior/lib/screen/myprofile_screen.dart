@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/logout_widget.dart';
+
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});
 
@@ -78,6 +80,7 @@ class MyProfileScreen extends StatelessWidget {
                               ),
                               overflow: TextOverflow.ellipsis,
                             ),
+
                             /*const SizedBox(
                               height: 15,
                             ),
@@ -89,6 +92,7 @@ class MyProfileScreen extends StatelessWidget {
                             ),*/
                           ],
                         ),
+                        const LogOut() //임시로 넣어놨어요 자리 바꿔주시면 될 듯
                       ],
                     ),
                   ),
