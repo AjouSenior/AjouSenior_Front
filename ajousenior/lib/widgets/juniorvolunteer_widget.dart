@@ -1,4 +1,3 @@
-import 'package:ajousenior/screen/juniorvolunteer_screen.dart';
 import 'package:ajousenior/screen/map_sample.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,7 +22,7 @@ class JuniorVolunteer extends StatelessWidget {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.3),
-                offset: const Offset(8, 8))
+                offset: const Offset(3, 3))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
@@ -32,7 +31,7 @@ class JuniorVolunteer extends StatelessWidget {
         width: 200,
         child: Text('봉사',
             style: GoogleFonts.notoSansKannada(
-              fontSize: 40,
+              fontSize: 30,
               color: Theme.of(context).colorScheme.outline,
             )),
       ),

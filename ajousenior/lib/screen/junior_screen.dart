@@ -23,6 +23,7 @@ class JuniorScreen extends StatelessWidget {
       body: const Padding(
         padding: EdgeInsets.all(8.0),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -38,12 +39,12 @@ class JuniorScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                SizedBox(
+                  height: 50,
+                ),
+                LogOut(),
               ],
             ),
-            SizedBox(
-              height: 50,
-            ),
-            LogOut(),
           ],
         ),
       ),
