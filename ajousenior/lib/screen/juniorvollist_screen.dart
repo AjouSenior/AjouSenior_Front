@@ -97,7 +97,8 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
               children: [
                 Text(location['seniorcenter']),
                 Text(location['content']),
-                Text(location['date']),
+                Text(
+                    "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분"),
                 Text("최대 인원: ${location['maxpeople']}"),
                 Text("현재 인원: ${location['currentpeople']}"),
                 Row(

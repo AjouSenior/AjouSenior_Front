@@ -120,7 +120,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    Text(date //날짜
+                                    Text(
+                                        "${DateTime.parse(date).month}월${DateTime.parse(date).day}일${DateTime.parse(date).hour}시${DateTime.parse(date).minute}분" //날짜
                                         ),
                                     Text(content //내용
                                         ),

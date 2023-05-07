@@ -54,7 +54,9 @@ class _MapScreenState extends State<MapScreen> {
         markerId: MarkerId(location['seniorcenter']),
         position: position,
         infoWindow: InfoWindow(
-          title: location['seniorcenter'],
+          title: location['seniorcenter'] +
+              " "
+                  "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분",
           snippet: location['content'],
           onTap: () async {
             print("포스트실행");

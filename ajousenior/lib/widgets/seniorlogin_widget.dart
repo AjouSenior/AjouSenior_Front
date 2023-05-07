@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../screen/junior_screen.dart';
+
 class SeniorLogin extends StatefulWidget {
   const SeniorLogin({super.key});
 
@@ -45,13 +47,25 @@ class _SeniorLoginState extends State<SeniorLogin> {
         } else {
           print(userInfo);
           Senior a = StringTo(userInfo); //사용예시
-          print(a.age_range);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SeniorScreen(),
-            ),
-          );
+          String lastTwoDigits =
+              a.age_range!.substring(a.age_range!.length - 2);
+          int lastTwoDigitsAsInt = int.parse(lastTwoDigits);
+          print(lastTwoDigitsAsInt);
+          if (lastTwoDigitsAsInt > 60) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const SeniorScreen(),
+              ),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const JuniorScreen(),
+              ),
+            );
+          }
         }
       },
       child: Container(
