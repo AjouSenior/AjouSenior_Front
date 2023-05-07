@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../models/senior_model.dart';
 import '../services/junior_volunteerlist.dart';
 
@@ -67,7 +66,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
                     );
                   }
 
-                  if (!snapshot.hasData) {
+                  while (!snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());
                   }
 
@@ -78,21 +77,59 @@ class _CurrentScreenState extends State<CurrentScreen> {
                     itemBuilder: (context, index) {
                       final place =
                           volunteerList[volunteerList.length - index - 1]
-                              ['place'];
+                              ['seniorcenter'];
                       final date =
                           volunteerList[volunteerList.length - index - 1]
                               ['date'];
 
+                      final content =
+                          volunteerList[volunteerList.length - index - 1]
+                              ['content'];
+
                       return ListTile(
-                        title: Text(
-                          place,
-                          style: const TextStyle(fontSize: 20),
-                          overflow: TextOverflow.ellipsis,
+                        title: Container(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          height: 130,
+                          width: double.maxFinite,
+                          child: Card(
+                            elevation: 5,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(
+                                    width: 9.0,
+                                    color: colorList[index % colorList.length],
+                                  ),
+                                ),
+                                color: Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(7),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      place, //장소
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(date //날짜
+                                        ),
+                                    Text(content //내용
+                                        ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
                         ),
-                        subtitle: Text(date),
-                        onTap: () {
-                          // TODO: 리스트 탭 시 동작
-                        },
                       );
                     },
                   );
@@ -100,68 +137,3 @@ class _CurrentScreenState extends State<CurrentScreen> {
               ));
   }
 }
-
-        //
-        //
-        //
-        // ListView.builder(
-        //   itemCount: Volunteer.length,
-        //   itemBuilder: (BuildContext context, int index) {
-        //     return ListTile(
-        //       title: Container(
-        //         padding: const EdgeInsets.symmetric(vertical: 2),
-        //         height: 130,
-        //         width: double.maxFinite,
-        //         child: Card(
-        //           elevation: 5,
-        //           child: Container(
-        //             decoration: BoxDecoration(
-        //               border: Border(
-        //                 left: BorderSide(
-        //                   width: 9.0,
-        //                   color: colorList[index % colorList.length],
-        //                 ),
-        //               ),
-        //               color: Colors.white,
-        //             ),
-        //             child: Padding(
-        //               padding: const EdgeInsets.all(7),
-        //               child: Column(
-        //                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //                 crossAxisAlignment: CrossAxisAlignment.start,
-        //                 children: [
-        //                   Text(
-        //                     testData
-        //                         .volunteerList[
-        //                             testData.volunteerList.length - index - 1]
-        //                         .place, //장소
-        //                     style: const TextStyle(
-        //                       fontSize: 20,
-        //                     ),
-        //                     overflow: TextOverflow.ellipsis,
-        //                   ),
-        //                   const SizedBox(
-        //                     height: 5,
-        //                   ),
-        //                   Text(
-        //                     testData
-        //                         .volunteerList[
-        //                             testData.volunteerList.length - index - 1]
-        //                         .userID, //날짜
-        //                   ),
-        //                   Text(
-        //                     testData
-        //                         .volunteerList[
-        //                             testData.volunteerList.length - index - 1]
-        //                         .date, //내용
-        //                   ),
-        //                 ],
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     );
-        //   },
-        // ),
-

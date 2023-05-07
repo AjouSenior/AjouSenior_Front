@@ -16,7 +16,9 @@ class _MainLoginState extends State<MainLogin> with TickerProviderStateMixin {
   bool visible1 = false;
   bool visible2 = false;
   bool visible3 = false;
+  bool visible4 = false;
 
+  final bool _showText = true;
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,11 @@ class _MainLoginState extends State<MainLogin> with TickerProviderStateMixin {
     Timer(const Duration(seconds: 4), () {
       setState(() {
         visible3 = true;
+      });
+    });
+    Timer(const Duration(seconds: 4), () {
+      setState(() {
+        visible4 = true;
       });
     });
   }
@@ -76,7 +83,21 @@ class _MainLoginState extends State<MainLogin> with TickerProviderStateMixin {
                 child: const JuniorLogin(),
               )
             ],
-          )
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          AnimatedOpacity(
+            opacity: visible4 ? 1.0 : 0.0,
+            duration: const Duration(milliseconds: 500),
+            child: GestureDetector(
+              // onTap: ,
+              child: const Text(
+                '시작하시려면 한번 클릭해 주세요',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+              ),
+            ),
+          ),
         ],
       ),
     );
