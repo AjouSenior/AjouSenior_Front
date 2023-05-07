@@ -95,9 +95,12 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
           return Card(
             child: Column(
               children: [
-                Text(location['seniorcenter']),
-                Text(location['content']),
                 Text(
+                  location['seniorcenter'],
+                  style: const TextStyle(fontSize: 20),
+                ),
+                Text("내용 : " + location['content']),
+                Text("시간 : "
                     "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분"),
                 Text("최대 인원: ${location['maxpeople']}"),
                 Text("현재 인원: ${location['currentpeople']}"),

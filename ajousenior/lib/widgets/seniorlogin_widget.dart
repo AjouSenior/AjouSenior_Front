@@ -74,16 +74,16 @@ class _SeniorLoginState extends State<SeniorLogin> {
           boxShadow: [
             BoxShadow(
                 color: const Color.fromARGB(255, 20, 146, 9).withOpacity(0.3),
-                offset: const Offset(6, 6))
+                offset: const Offset(3, 3))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
         ),
-        height: 150,
-        width: 180,
-        child: Text('Senior',
+        height: 50,
+        width: 100,
+        child: Text('로그인',
             style: GoogleFonts.notoSansKannada(
-              fontSize: 40,
+              fontSize: 20,
               color: Theme.of(context).colorScheme.outline,
             )),
       ),

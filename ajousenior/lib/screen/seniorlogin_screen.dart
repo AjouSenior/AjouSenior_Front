@@ -1,7 +1,6 @@
 import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/widgets/hidelogin_widget.dart';
 import 'package:ajousenior/widgets/hidelogin_widget2.dart';
-import 'package:ajousenior/widgets/seniorkakao_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 
@@ -42,50 +41,64 @@ class _SeniorLoginScreenState extends State<SeniorLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SeniorKakao(),
-          const SizedBox(
-            height: 5,
-          ),
-          const LoginWidget(),
-          const SizedBox(
-            height: 5,
-          ),
-          const LoginWidget2(),
-          const SizedBox(
-            height: 5,
-          ),
-          ElevatedButton(
-              child: const Text('카카오로그인'),
-              onPressed: () async {
-                if (await isKakaoTalkInstalled()) {
-                  try {
-                    await UserApi.instance.loginWithKakaoTalk();
-                    print('카카오톡으로 로그인 성공');
-                    _get_user_info();
-                  } catch (error) {
-                    print('카카오톡으로 로그인 실패 $error');
-                    // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
-                    try {
-                      await UserApi.instance.loginWithKakaoAccount();
-                      print('카카오계정으로 로그인 성공');
-                      _get_user_info();
-                    } catch (error) {
-                      print('카카오계정으로 로그인 실패 $error');
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text("카카오 로그인을 기본으로 제공하고 있습니다",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+              const SizedBox(
+                height: 80,
+              ),
+              ElevatedButton(
+                  child: Image.asset(
+                    'assets/kakaopic.png',
+                    width: 170, // 원하는 너비
+                    height: 40, // 원하는 높이
+                    fit: BoxFit.cover, // 이미지 비율을 유지하면서 모든 내용이 보이도록 조정
+                  ),
+                  onPressed: () async {
+                    if (await isKakaoTalkInstalled()) {
+                      try {
+                        await UserApi.instance.loginWithKakaoTalk();
+                        print('카카오톡으로 로그인 성공');
+                        _get_user_info();
+                      } catch (error) {
+                        print('카카오톡으로 로그인 실패 $error');
+                        // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인
+                        try {
+                          await UserApi.instance.loginWithKakaoAccount();
+                          print('카카오계정으로 로그인 성공');
+                          _get_user_info();
+                        } catch (error) {
+                          print('카카오계정으로 로그인 실패 $error');
+                        }
+                      }
+                    } else {
+                      try {
+                        await UserApi.instance.loginWithKakaoAccount();
+                        print('카카오계정으로 로그인 성공');
+                        _get_user_info();
+                      } catch (error) {
+                        print('카카오계정으로 로그인 실패 $error');
+                      }
                     }
-                  }
-                } else {
-                  try {
-                    await UserApi.instance.loginWithKakaoAccount();
-                    print('카카오계정으로 로그인 성공');
-                    _get_user_info();
-                  } catch (error) {
-                    print('카카오계정으로 로그인 실패 $error');
-                  }
-                }
-              })
+                  }),
+              const SizedBox(
+                height: 100,
+              ),
+              const LoginWidget(),
+              const SizedBox(
+                height: 5,
+              ),
+              const LoginWidget2(),
+              const SizedBox(
+                height: 5,
+              ),
+            ],
+          ),
         ],
       ),
     );

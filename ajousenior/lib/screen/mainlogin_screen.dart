@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ajousenior/widgets/juniorlogin_widget.dart';
 import 'package:ajousenior/widgets/seniorlogin_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -77,11 +76,6 @@ class _MainLoginState extends State<MainLogin> with TickerProviderStateMixin {
                   opacity: visible3 ? 1.0 : 0.0,
                   duration: const Duration(milliseconds: 500),
                   child: const SeniorLogin()),
-              AnimatedOpacity(
-                opacity: visible3 ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 500),
-                child: const JuniorLogin(),
-              )
             ],
           ),
           const SizedBox(
@@ -93,7 +87,7 @@ class _MainLoginState extends State<MainLogin> with TickerProviderStateMixin {
             child: GestureDetector(
               // onTap: ,
               child: const Text(
-                '시작하시려면 한번 클릭해 주세요',
+                '시작하시려면 \'로그인\' 을 한번 클릭해 주세요',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
             ),
