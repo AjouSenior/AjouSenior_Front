@@ -1,5 +1,6 @@
 import 'package:ajousenior/widgets/juniorcurrent_widget.dart';
 import 'package:ajousenior/widgets/juniorvolunteer_widget.dart';
+import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 
 class JuniorScreen extends StatelessWidget {
@@ -41,7 +42,8 @@ class JuniorScreen extends StatelessWidget {
             ),
             SizedBox(
               height: 50,
-            )
+            ),
+            LogOut(),
           ],
         ),
       ),

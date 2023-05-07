@@ -1,26 +1,29 @@
-// 승수//seungsu8826@naver.com//null//AgeRange.age_20_29//우만주공1단지경로당//0311//643a5d66fbc5fd3feb88cfc5
-
-import 'package:ajousenior/screen/junior_screen.dart';
+import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginWidget extends StatefulWidget {
-  const LoginWidget({super.key});
+import '../services/login_service.dart';
+
+class LoginWidget2 extends StatefulWidget {
+  const LoginWidget2({super.key});
 
   @override
-  State<LoginWidget> createState() => _LoginWidgetState();
+  State<LoginWidget2> createState() => _LoginWidget2State();
 }
 
-class _LoginWidgetState extends State<LoginWidget> {
+class _LoginWidget2State extends State<LoginWidget2> {
   static const storage = FlutterSecureStorage();
   @override
   Widget build(BuildContext context) {
     logIn() async {
+      final id = await LoginService.sendLogin('시니어', 'senior@naver.com', 'null',
+          'AgeRange.age_60_69', '우만주공2단지경로당', '0415');
       storage.write(
         key: 'login',
         value:
-            '승수//seungsu8826@naver.com//null//AgeRange.age_20_29//우만주공2단지경로당//0311//645225a92229f4c11b87b592',
+            '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공2단지경로당//0415//' +
+                id,
       );
     }
 
@@ -31,7 +34,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const JuniorScreen(),
+            builder: (context) => const SeniorScreen(),
           ),
         );
       },
@@ -48,7 +51,7 @@ class _LoginWidgetState extends State<LoginWidget> {
         ),
         height: 40,
         width: 70,
-        child: Text('주니어 로그인',
+        child: Text('시니어 로그인',
             style: GoogleFonts.notoSansKannada(
               fontSize: 10,
               color: Theme.of(context).colorScheme.outline,
