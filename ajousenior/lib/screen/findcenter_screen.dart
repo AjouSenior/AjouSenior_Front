@@ -1,4 +1,5 @@
 import 'package:ajousenior/screen/senior_screen.dart';
+import 'package:ajousenior/screen/signupconfirm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ajousenior/services/findcenter_service.dart';
 import 'package:ajousenior/services/login_service.dart';
@@ -63,24 +64,9 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                   final LOGT = _dataList['data'][index]['REFINE_WGS84_LOGT'];
                   return GestureDetector(
                     onTap: () async {
-                      final id = await LoginService.sendLogin(
-                          widget.data.profile_nickname,
-                          widget.data.account_email,
-                          widget.data.gender,
-                          widget.data.age_range,
-                          specificValue,
-                          widget.data.birthday);
                       widget.data.seniorcenter = specificValue;
-                      widget.data.id = id;
-                      await storage.write(
-                        key: 'login',
-                        value: widget.data.toString(),
-                      );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const SeniorScreen()),
-                      );
+                      MaterialPageRoute(
+                          builder: (context) => SignUpConfirm(widget.data));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(10),

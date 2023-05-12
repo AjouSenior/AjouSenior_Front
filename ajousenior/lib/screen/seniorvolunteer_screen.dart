@@ -1,4 +1,5 @@
 import 'package:ajousenior/data/volunteer_post.dart';
+import 'package:ajousenior/screen/seniorvolunteer_myscreen.dart';
 import 'package:ajousenior/screen/volunteer_content_screen.dart';
 import 'package:ajousenior/screen/volunteer_post_screen.dart';
 import 'package:ajousenior/widgets/volunteer_onrecruit_widget.dart';
@@ -21,16 +22,29 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 2,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.green,
-        title: const Center(
-          child: Text(
-            "Senior App",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
-          ),
-        ),
-      ),
+          title: const Text('재능기부 선택'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.green,
+          actions: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.verified_user_outlined),
+              onPressed: () {
+                // 아이콘 버튼 실행
+              },
+            ),
+            IconButton(
+              icon: const Icon(Icons.verified_user_outlined), // 검색 아이콘 생성
+              onPressed: () {
+                // 아이콘 버튼 실행
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SeniorMyScreen(),
+                  ),
+                );
+              },
+            ),
+          ]),
       body: FutureBuilder<List<VolunteerPost>>(
         future: VolunteerProviders().getPost(),
         builder: (context, snapshot) {
