@@ -41,64 +41,94 @@ class MyProfileScreen extends StatelessWidget {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(7),
-                    child: Row(
+                    child: Column(
                       children: [
-                        Container(
-                          width: 95,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: const Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 80,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                        Row(
                           children: [
-                            Text(
-                              'Name',
-                              style: TextStyle(
-                                fontSize: 30,
+                            Container(
+                              width: 95,
+                              height: 95,
+                              decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(30),
                               ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'test',
-                              style: TextStyle(
-                                fontSize: 25,
+                              child: const Icon(
+                                Icons.person,
+                                color: Colors.white,
+                                size: 80,
                               ),
-                              overflow: TextOverflow.ellipsis,
                             ),
-
-                            /*const SizedBox(
-                              height: 15,
+                            const SizedBox(
+                              width: 16,
                             ),
-                            Text(
-                              'test',
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.5),
-                              ),
-                            ),*/
+                            const Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Name',
+                                  style: TextStyle(
+                                    fontSize: 30,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'test',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
-                        const LogOut() //임시로 넣어놨어요 자리 바꿔주시면 될 듯
                       ],
                     ),
                   ),
                 ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.separated(
+                itemCount: 3,
+                itemBuilder: (context, index) => ListTile(
+                  title: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    height: 120,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'text',
+                          style: TextStyle(
+                            fontSize: 30,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        Text(
+                          'text',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                separatorBuilder: (context, index) => const Divider(),
+              ),
+            ),
+            const LogOut(),
           ],
         ),
       ),

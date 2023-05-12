@@ -60,14 +60,14 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
               labelText: 'content',
               hintText: 'content',
             ),
-            const SizedBox(
+            /*const SizedBox(
               height: 10,
             ),
             AdvancedTextField(
               controller: centerarea,
               labelText: 'seniorcenter',
               hintText: 'seniorcenter',
-            ),
+            ),*/
             const SizedBox(
               height: 10,
             ),

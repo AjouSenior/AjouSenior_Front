@@ -1,4 +1,5 @@
 import 'package:ajousenior/data/volunteer_post.dart';
+import 'package:ajousenior/widgets/certify_widget.dart';
 import 'package:flutter/material.dart';
 
 class VolunteerContentScreen extends StatelessWidget {
@@ -43,11 +44,19 @@ class VolunteerContentScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 50,
+              height: 40,
             ),
-            Text(
-              current.date,
-            ),
+            Row(
+              children: [
+                Text(
+                  current.date,
+                ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                const CertifyButton(),
+              ],
+            )
           ],
         ),
       ),

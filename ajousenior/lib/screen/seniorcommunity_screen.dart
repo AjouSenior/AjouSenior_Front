@@ -96,9 +96,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
                                 ),
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              const SizedBox(
-                                height: 30,
-                              ),
+                              const Expanded(child: SizedBox()),
                               Text(
                                 '${snapshot.data![snapshot.data!.length - index - 1].date} / ${snapshot.data![snapshot.data!.length - index - 1].userID}',
                                 style: TextStyle(
