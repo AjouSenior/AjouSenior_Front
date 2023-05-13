@@ -1,8 +1,6 @@
-import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:ajousenior/screen/signupconfirm_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ajousenior/services/findcenter_service.dart';
-import 'package:ajousenior/services/login_service.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../models/senior_model.dart';
@@ -64,9 +62,13 @@ class _FindCenterWidgetState extends State<FindCenterWidget> {
                   final LOGT = _dataList['data'][index]['REFINE_WGS84_LOGT'];
                   return GestureDetector(
                     onTap: () async {
+                      print("누름");
                       widget.data.seniorcenter = specificValue;
-                      MaterialPageRoute(
-                          builder: (context) => SignUpConfirm(widget.data));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SignUpConfirm(widget.data)));
                     },
                     child: Container(
                       padding: const EdgeInsets.all(10),
