@@ -29,7 +29,7 @@ class Ai extends StatelessWidget {
         ),
         height: 150,
         width: 200,
-        child: Text('AI',
+        child: Text('세나',
             style: GoogleFonts.notoSansKannada(
               fontSize: 40,
               color: Theme.of(context).colorScheme.outline,

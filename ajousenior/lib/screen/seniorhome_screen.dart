@@ -31,15 +31,15 @@ class SeniorHomeScreen extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
+                SeniorVolunteer(),
+                SizedBox(
+                  height: 20,
+                ),
                 Ai(),
                 SizedBox(
                   height: 20,
                 ),
                 Community(),
-                SizedBox(
-                  height: 20,
-                ),
-                SeniorVolunteer(),
               ],
             ),
             SizedBox(
