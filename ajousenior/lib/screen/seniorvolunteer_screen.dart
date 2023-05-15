@@ -39,7 +39,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SeniorMyScreen(),
+                    builder: (context) => const SeniorMyScreen(),
                   ),
                 );
               },
@@ -136,8 +136,8 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 5,
+                              const Expanded(
+                                child: SizedBox(),
                               ),
                               Text(
                                 snapshot
