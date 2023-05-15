@@ -8,6 +8,7 @@ class VolunteerPost {
   final String content;
   final int min;
   final int max;
+  final String donationid;
   //final int members; //for test
   int members = 0;
 
@@ -19,6 +20,7 @@ class VolunteerPost {
     required this.content,
     required this.min,
     required this.max,
+    required this.donationid,
     required this.members, //for test
   });
   factory VolunteerPost.fromJson(Map<String, dynamic>? map) {
@@ -30,11 +32,12 @@ class VolunteerPost {
       min: 5,
       max: map?['maxpeople'] ?? 30,
       members: map?['currentpeople'] ?? 0,
+      donationid: map?['_id'] ?? '',
     );
   }
 }
 
-final List<VolunteerPost> entries = [
+/*final List<VolunteerPost> entries = [
   VolunteerPost(
     content: '어디서 뭐할사람 모집합니다 111111 111111111 11111 111111 11111111',
     place: '수원경로당',
@@ -80,4 +83,4 @@ final List<VolunteerPost> entries = [
     max: 30,
     members: 15,
   ),
-];
+];*/
