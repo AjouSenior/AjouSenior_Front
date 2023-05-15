@@ -97,7 +97,8 @@ class _AiScreenState extends State<AiScreen> {
           ),
         ),
         appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.green,
           leading: IconButton(
             icon: const Icon(Icons.home),
             onPressed: () {
@@ -110,29 +111,28 @@ class _AiScreenState extends State<AiScreen> {
             },
           ),
           centerTitle: true,
-          elevation: 0.0,
+          elevation: 2,
           title: Text(
-            '세나입니다',
+            '세나',
             style: GoogleFonts.notoSansKannada(
-              fontSize: 37,
+              fontSize: 25,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
             ),
           ),
         ),
         body: Container(
-          color: Theme.of(context).colorScheme.secondaryContainer,
+          color: Colors.white,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             children: [
               Text(
                 text,
                 style: GoogleFonts.notoSansKannada(
-                  fontSize: 30,
+                  fontSize: 27,
                   color: isListening
                       ? Colors.black
                       : const Color.fromARGB(255, 121, 120, 120),
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               const SizedBox(
@@ -144,7 +144,7 @@ class _AiScreenState extends State<AiScreen> {
                       const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
+                    color: Colors.green.withOpacity(0.13),
                   ),
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
@@ -174,7 +174,7 @@ Widget chatBubble({required chattext, required ChatMessageType? type}) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       CircleAvatar(
-        backgroundColor: Colors.amber.shade50,
+        backgroundColor: Colors.green.withOpacity(0.13),
         child: type == ChatMessageType.bot
             ? Image.asset('assets/ChatGPTIcon.png')
             : const Icon(
