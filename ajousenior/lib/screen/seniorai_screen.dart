@@ -1,5 +1,6 @@
 import 'package:ajousenior/models/chat_model.dart';
 import 'package:ajousenior/models/tts.dart';
+import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:ajousenior/services/gpt_service.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
@@ -29,125 +30,139 @@ class _AiScreenState extends State<AiScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: AvatarGlow(
-        endRadius: 75.0,
-        animate: isListening,
-        duration: const Duration(milliseconds: 2000),
-        glowColor: Theme.of(context).colorScheme.secondaryContainer,
-        repeat: true,
-        repeatPauseDuration: const Duration(milliseconds: 100),
-        showTwoGlows: true,
-        child: GestureDetector(
-          onTapDown: (details) async {
-            if (!isListening) {
-              var available = await speechToText.initialize();
-              if (available) {
-                setState(() {
-                  isListening = true;
-                  speechToText.listen(
-                    onResult: (result) {
-                      setState(() {
-                        text = result.recognizedWords;
-                      });
-                    },
-                  );
-                });
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // 뒤로가기 버튼을 무시하고 아무 동작도 하지 않음
+      },
+      child: Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: AvatarGlow(
+          endRadius: 75.0,
+          animate: isListening,
+          duration: const Duration(milliseconds: 2000),
+          glowColor: Theme.of(context).colorScheme.secondaryContainer,
+          repeat: true,
+          repeatPauseDuration: const Duration(milliseconds: 100),
+          showTwoGlows: true,
+          child: GestureDetector(
+            onTapDown: (details) async {
+              if (!isListening) {
+                var available = await speechToText.initialize();
+                if (available) {
+                  setState(() {
+                    isListening = true;
+                    speechToText.listen(
+                      onResult: (result) {
+                        setState(() {
+                          text = result.recognizedWords;
+                        });
+                      },
+                    );
+                  });
+                }
               }
-            }
-          },
-          onTapUp: (details) async {
-            setState(() {
-              isListening = false;
-            });
-            await speechToText.stop();
-
-            if (text.isNotEmpty && text != "버튼을 누르면서 말해주세요") {
-              messages.add(ChatMessage(text: text, type: ChatMessageType.user));
-              var msg = await GptService.sendMessage(text);
-              msg = msg.trim();
+            },
+            onTapUp: (details) async {
               setState(() {
-                messages.add(ChatMessage(text: msg, type: ChatMessageType.bot));
+                isListening = false;
               });
+              await speechToText.stop();
 
-              Future.delayed(const Duration(milliseconds: 500), () {
-                TextToSpeech.speak(msg);
-              });
-            } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("Failed to Process try again")));
-            }
-          },
-          child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-            radius: 35,
-            child: Icon(
-              isListening ? Icons.mic : Icons.mic_none,
-              color: Colors.grey,
-            ),
-          ),
-        ),
-      ),
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-        leading: const Icon(
-          Icons.sort_rounded,
-          color: Colors.white,
-        ),
-        centerTitle: true,
-        elevation: 0.0,
-        title: Text(
-          '세나입니다',
-          style: GoogleFonts.notoSansKannada(
-            fontSize: 37,
-            fontWeight: FontWeight.w600,
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: Container(
-        color: Theme.of(context).colorScheme.secondaryContainer,
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-        child: Column(
-          children: [
-            Text(
-              text,
-              style: GoogleFonts.notoSansKannada(
-                fontSize: 30,
-                color: isListening
-                    ? Colors.black
-                    : const Color.fromARGB(255, 121, 120, 120),
-                fontWeight: FontWeight.w600,
+              if (text.isNotEmpty && text != "버튼을 누르면서 말해주세요") {
+                messages
+                    .add(ChatMessage(text: text, type: ChatMessageType.user));
+                var msg = await GptService.sendMessage(text);
+                msg = msg.trim();
+                setState(() {
+                  messages
+                      .add(ChatMessage(text: msg, type: ChatMessageType.bot));
+                });
+
+                Future.delayed(const Duration(milliseconds: 500), () {
+                  TextToSpeech.speak(msg);
+                });
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text("Failed to Process try again")));
+              }
+            },
+            child: CircleAvatar(
+              backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+              radius: 35,
+              child: Icon(
+                isListening ? Icons.mic : Icons.mic_none,
+                color: Colors.grey,
               ),
             ),
-            const SizedBox(
-              height: 12,
+          ),
+        ),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+          leading: IconButton(
+            icon: const Icon(Icons.home),
+            onPressed: () {
+              // 홈 버튼을 눌렀을 때 수행할 동작
+              // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SeniorScreen()));
+            },
+          ),
+          centerTitle: true,
+          elevation: 0.0,
+          title: Text(
+            '세나입니다',
+            style: GoogleFonts.notoSansKannada(
+              fontSize: 37,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
             ),
-            Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  color: Colors.white,
+          ),
+        ),
+        body: Container(
+          color: Theme.of(context).colorScheme.secondaryContainer,
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          child: Column(
+            children: [
+              Text(
+                text,
+                style: GoogleFonts.notoSansKannada(
+                  fontSize: 30,
+                  color: isListening
+                      ? Colors.black
+                      : const Color.fromARGB(255, 121, 120, 120),
+                  fontWeight: FontWeight.w600,
                 ),
-                child: ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    controller: scrollController,
-                    shrinkWrap: true,
-                    itemCount: messages.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var chat = messages[index];
-
-                      return chatBubble(chattext: chat.text, type: chat.type);
-                    }),
               ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-          ],
+              const SizedBox(
+                height: 12,
+              ),
+              Expanded(
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.white,
+                  ),
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      controller: scrollController,
+                      shrinkWrap: true,
+                      itemCount: messages.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        var chat = messages[index];
+
+                        return chatBubble(chattext: chat.text, type: chat.type);
+                      }),
+                ),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+            ],
+          ),
         ),
       ),
     );

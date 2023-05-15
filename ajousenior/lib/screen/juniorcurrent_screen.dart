@@ -1,3 +1,4 @@
+import 'package:ajousenior/screen/junior_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../models/senior_model.dart';
@@ -42,99 +43,118 @@ class _CurrentScreenState extends State<CurrentScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          elevation: 2,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.green,
-          title: const Center(
-            child: Text(
-              "Junior App",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // 뒤로가기 버튼을 무시하고 아무 동작도 하지 않음
+      },
+      child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                // 홈 버튼을 눌렀을 때 수행할 동작
+                // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const JuniorScreen()));
+              },
+            ),
+            elevation: 2,
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.green,
+            title: const Center(
+              child: Text(
+                "Junior App",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
+              ),
             ),
           ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 237, 255, 240),
-        body: userInfo.isEmpty // userInfo가 비어있는 경우
-            ? const Center(child: CircularProgressIndicator()) // 로딩 중 표시
-            : FutureBuilder<List<Map<String, dynamic>>>(
-                future: JuniorVolunList.juniorVolunlist(StringTo(userInfo).id),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return Center(
-                      child: Text('Error: ${snapshot.error}'),
-                    );
-                  }
+          backgroundColor: const Color.fromARGB(255, 237, 255, 240),
+          body: userInfo.isEmpty // userInfo가 비어있는 경우
+              ? const Center(child: CircularProgressIndicator()) // 로딩 중 표시
+              : FutureBuilder<List<Map<String, dynamic>>>(
+                  future:
+                      JuniorVolunList.juniorVolunlist(StringTo(userInfo).id),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Error: ${snapshot.error}'),
+                      );
+                    }
 
-                  while (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+                    while (!snapshot.hasData) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
 
-                  final volunteerList = snapshot.data!;
+                    final volunteerList = snapshot.data!;
 
-                  return ListView.builder(
-                    itemCount: volunteerList.length,
-                    itemBuilder: (context, index) {
-                      final place =
-                          volunteerList[volunteerList.length - index - 1]
-                              ['seniorcenter'];
-                      final date =
-                          volunteerList[volunteerList.length - index - 1]
-                              ['date'];
+                    return ListView.builder(
+                      itemCount: volunteerList.length,
+                      itemBuilder: (context, index) {
+                        final place =
+                            volunteerList[volunteerList.length - index - 1]
+                                ['seniorcenter'];
+                        final date =
+                            volunteerList[volunteerList.length - index - 1]
+                                ['date'];
 
-                      final content =
-                          volunteerList[volunteerList.length - index - 1]
-                              ['content'];
+                        final content =
+                            volunteerList[volunteerList.length - index - 1]
+                                ['content'];
 
-                      return ListTile(
-                        title: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 2),
-                          height: 130,
-                          width: double.maxFinite,
-                          child: Card(
-                            elevation: 5,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(
-                                    width: 9.0,
-                                    color: colorList[index % colorList.length],
+                        return ListTile(
+                          title: Container(
+                            padding: const EdgeInsets.symmetric(vertical: 2),
+                            height: 130,
+                            width: double.maxFinite,
+                            child: Card(
+                              elevation: 5,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    left: BorderSide(
+                                      width: 9.0,
+                                      color:
+                                          colorList[index % colorList.length],
+                                    ),
                                   ),
+                                  color: Colors.white,
                                 ),
-                                color: Colors.white,
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(7),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      place, //장소
-                                      style: const TextStyle(
-                                        fontSize: 20,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(7),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        place, //장소
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                        ),
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                        "${DateTime.parse(date).month}월${DateTime.parse(date).day}일${DateTime.parse(date).hour}시${DateTime.parse(date).minute}분" //날짜
-                                        ),
-                                    Text(content //내용
-                                        ),
-                                  ],
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                          "${DateTime.parse(date).month}월${DateTime.parse(date).day}일${DateTime.parse(date).hour}시${DateTime.parse(date).minute}분" //날짜
+                                          ),
+                                      Text(content //내용
+                                          ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ));
+                        );
+                      },
+                    );
+                  },
+                )),
+    );
   }
 }

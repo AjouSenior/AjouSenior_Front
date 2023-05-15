@@ -1,3 +1,4 @@
+import 'package:ajousenior/screen/junior_screen.dart';
 import 'package:ajousenior/screen/juniorvollist_screen.dart';
 import 'package:ajousenior/services/volunteerlist_service.dart';
 import 'package:flutter/material.dart';
@@ -101,36 +102,54 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('재능기부 선택'), actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.map_outlined),
-          onPressed: () {
-            // 아이콘 버튼 실행
-          },
-        ),
-        IconButton(
-          icon: const Icon(Icons.list_alt), // 검색 아이콘 생성
-          onPressed: () {
-            // 아이콘 버튼 실행
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const VolunteerListScreen(),
+    return WillPopScope(
+      onWillPop: () async {
+        return false; // 뒤로가기 버튼을 무시하고 아무 동작도 하지 않음
+      },
+      child: Scaffold(
+        appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () {
+                // 홈 버튼을 눌렀을 때 수행할 동작
+                // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const JuniorScreen()));
+              },
+            ),
+            title: const Text('재능기부 선택'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.map_outlined),
+                onPressed: () {
+                  // 아이콘 버튼 실행
+                },
               ),
-            );
+              IconButton(
+                icon: const Icon(Icons.list_alt), // 검색 아이콘 생성
+                onPressed: () {
+                  // 아이콘 버튼 실행
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const VolunteerListScreen(),
+                    ),
+                  );
+                },
+              ),
+            ]),
+        body: GoogleMap(
+          onMapCreated: (GoogleMapController controller) {
+            mapController = controller;
           },
+          initialCameraPosition: const CameraPosition(
+            target: LatLng(37.283653, 127.045009),
+            zoom: 14,
+          ),
+          markers: getMarkers(),
         ),
-      ]),
-      body: GoogleMap(
-        onMapCreated: (GoogleMapController controller) {
-          mapController = controller;
-        },
-        initialCameraPosition: const CameraPosition(
-          target: LatLng(37.283653, 127.045009),
-          zoom: 14,
-        ),
-        markers: getMarkers(),
       ),
     );
   }
