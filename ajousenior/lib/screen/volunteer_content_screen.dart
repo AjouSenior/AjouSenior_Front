@@ -1,13 +1,25 @@
 import 'package:ajousenior/data/volunteer_post.dart';
+import 'package:ajousenior/provider/volunteerprovider.dart';
 import 'package:ajousenior/widgets/certify_widget.dart';
 import 'package:flutter/material.dart';
 
-class VolunteerContentScreen extends StatelessWidget {
+class VolunteerContentScreen extends StatefulWidget {
   final VolunteerPost current;
   const VolunteerContentScreen({
     super.key,
     required this.current,
   });
+
+  @override
+  State<VolunteerContentScreen> createState() => _VolunteerContentScreenState();
+}
+
+class _VolunteerContentScreenState extends State<VolunteerContentScreen> {
+  late List<String> volunteerList;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,7 @@ class VolunteerContentScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              current.content,
+              widget.current.content,
               style: const TextStyle(
                 fontSize: 32,
               ),
@@ -38,25 +50,46 @@ class VolunteerContentScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              '${current.members} / ${current.max}',
+              '${widget.current.members} / ${widget.current.max}',
               style: TextStyle(
                 color: Colors.black.withOpacity(0.5),
               ),
             ),
             const SizedBox(
-              height: 40,
+              height: 30,
             ),
             Row(
               children: [
                 Text(
-                  current.date,
+                  widget.current.date,
                 ),
                 const Expanded(
                   child: SizedBox(),
                 ),
                 const CertifyButton(),
               ],
-            )
+            ),
+            const Text('신청자'),
+            const SizedBox(
+              height: 10,
+            ),
+            FutureBuilder(
+              future: VolunteerProviders().getList(widget.current.donationid),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                  return const Text('No data');
+                } else {
+                  return Column(
+                    children:
+                        snapshot.data!.map((string) => Text(string)).toList(),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
