@@ -23,16 +23,19 @@ class VolunteerProviders {
   Future<List<VolunteerPost>> getmyPost(String? username) async {
     var url = Uri.http("54.180.8.70:4000", "/senior/mytalentdonation");
     List<VolunteerPost> entries = [];
+    var data = {"username": username};
+    var body = json.encode(data);
     final response = await http.post(
       url,
-      body: {"username": username},
+      headers: {"Content-Type": "application/json"},
+      body: body,
     );
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
       for (var posts in responseJson['data']) {
         entries.add(VolunteerPost.fromJson(posts));
       }
-      print(entries[0].members);
       return entries;
     } else {
       throw Exception('Failed to load post');
@@ -45,17 +48,14 @@ class VolunteerProviders {
     List<String> entries = [];
     var data = {"donationid": donationID};
     var body = json.encode(data);
-    print('aaa');
     final response = await http.post(
       url,
       headers: {"Content-Type": "application/json"},
       body: body,
     );
-    print(json.decode(response.body)["data"]);
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
       for (dynamic users in responseJson['data']) {
-        print(users[0]["profile_nickname"]);
         entries.add(users[0]["profile_nickname"]);
       }
       return entries;

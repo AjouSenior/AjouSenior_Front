@@ -5,6 +5,8 @@ import 'package:ajousenior/screen/volunteer_content_screen.dart';
 import 'package:ajousenior/screen/volunteer_post_screen.dart';
 import 'package:ajousenior/widgets/volunteer_onrecruit_widget.dart';
 import 'package:ajousenior/provider/volunteerprovider.dart';
+import 'package:ajousenior/models/senior_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 
 class SeniorVolunteerScreen extends StatefulWidget {
@@ -14,9 +16,25 @@ class SeniorVolunteerScreen extends StatefulWidget {
 }
 
 class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
+  static var storage = const FlutterSecureStorage();
+  dynamic userInfo = '';
+  late Senior user;
   @override
   void initState() {
     super.initState();
+    // 비동기로 flutter secure storage 정보를 불러오는 작업
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _asyncMethod();
+/*      if (userInfo != '') {
+        user = StringTo(userInfo);
+      }*/
+    });
+  }
+
+  _asyncMethod() async {
+    // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
+    userInfo = await storage.read(key: 'login');
+    user = StringTo(userInfo);
   }
 
   @override
@@ -55,7 +73,9 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SeniorMyScreen(),
+                      builder: (context) => SeniorMyScreen(
+                        user: user,
+                      ),
                     ),
                   );
                 },
@@ -64,7 +84,13 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
         body: FutureBuilder<List<VolunteerPost>>(
           future: VolunteerProviders().getPost(),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Text('No data');
+            } else {
               return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
@@ -186,10 +212,7 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                   );
                 },
               );
-            } else if (snapshot.hasError) {
-              return Text('${snapshot.error}');
             }
-            return const Center(child: CircularProgressIndicator());
           },
         ),
         floatingActionButton: FloatingActionButton(
