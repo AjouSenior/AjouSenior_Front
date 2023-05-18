@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/data/volunteer_post.dart';
 
 class VolunteerProviders {
@@ -42,10 +43,10 @@ class VolunteerProviders {
     }
   }
 
-  Future<List<String>> getList(String donationID) async {
+  Future<List<Senior>> getList(String donationID) async {
     final url =
         Uri.parse("http://54.180.8.70:4000/senior/findtalentdonationhope");
-    List<String> entries = [];
+    List<Senior> entries = [];
     var data = {"donationid": donationID};
     var body = json.encode(data);
     final response = await http.post(
@@ -55,8 +56,8 @@ class VolunteerProviders {
     );
     if (response.statusCode == 200) {
       final responseJson = json.decode(response.body);
-      for (dynamic users in responseJson['data']) {
-        entries.add(users[0]["profile_nickname"]);
+      for (var users in responseJson['data']) {
+        entries.add(Senior.fromJson(users[0]));
       }
       return entries;
     } else {

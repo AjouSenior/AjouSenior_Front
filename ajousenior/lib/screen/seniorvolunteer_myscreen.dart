@@ -4,7 +4,6 @@ import 'package:ajousenior/screen/volunteer_post_screen.dart';
 import 'package:ajousenior/screen/volunteer_content_screen.dart';
 import 'package:ajousenior/provider/volunteerprovider.dart';
 import 'package:ajousenior/widgets/volunteer_onrecruit_widget.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 
 class SeniorMyScreen extends StatefulWidget {
@@ -16,7 +15,6 @@ class SeniorMyScreen extends StatefulWidget {
 }
 
 class _SeniorMyScreenState extends State<SeniorMyScreen> {
-  static var storage = const FlutterSecureStorage();
   dynamic userInfo = '';
   //late Senior user;
   @override
