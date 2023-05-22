@@ -3,8 +3,12 @@ import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import '../data/volunteer_post.dart';
+import '../provider/volunteerprovider.dart';
+
 class MyProfileScreen extends StatefulWidget {
-  const MyProfileScreen({data, super.key});
+  const MyProfileScreen({super.key});
+
   @override
   State<MyProfileScreen> createState() => _MyProfileScreenState();
 }
@@ -12,7 +16,7 @@ class MyProfileScreen extends StatefulWidget {
 class _MyProfileScreenState extends State<MyProfileScreen> {
   static var storage = const FlutterSecureStorage();
   dynamic userInfo = '';
-  print(userInfo) async => throw UnimplementedError();
+
   Widget body = const Center(
     child: CircularProgressIndicator(),
   );
@@ -101,10 +105,134 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              Expanded(
+                child: FutureBuilder<List<VolunteerPost>>(
+                  future: VolunteerProviders().getlastPost(a.profile_nickname),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              height: 130,
+                              width: double.maxFinite,
+                              child: Card(
+                                elevation: 5,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                        width: 9.0,
+                                        color: snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .members >=
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .max
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      snapshot
+                                                          .data![snapshot.data!
+                                                                  .length -
+                                                              index -
+                                                              1]
+                                                          .content,
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                          ],
+                                        ),
+                                        const Expanded(
+                                          child: SizedBox(),
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .data![snapshot.data!.length -
+                                                  index -
+                                                  1]
+                                              .place,
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .data![snapshot.data!.length -
+                                                  index -
+                                                  1]
+                                              .date,
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                        ),
+                                        Text(
+                                          '신청 / 최대인원 : ${snapshot.data![snapshot.data!.length - index - 1].members} / ${snapshot.data![snapshot.data!.length - index - 1].max}',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text('No data');
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
               ),
-              const LogOut()
+              const LogOut(),
             ],
           ),
         );
