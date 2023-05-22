@@ -78,7 +78,7 @@ class MyProfileScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   SizedBox(
-                                    height: 20,
+                                    height: 15,
                                   ),
                                   Text(
                                     'test',
