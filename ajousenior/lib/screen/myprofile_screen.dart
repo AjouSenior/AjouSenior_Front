@@ -1,3 +1,4 @@
+import 'package:ajousenior/data/Seniordata.dart';
 import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
@@ -24,13 +25,13 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   Future<void> _asyncMethod() async {
     // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
     userInfo = await storage.read(key: 'login');
+    Senior a = SeniorData.senior;
     setState(() {
-      if (userInfo == null || userInfo.isEmpty) {
+      if (a == null) {
         body = const Center(
           child: CircularProgressIndicator(),
         );
       } else {
-        Senior a = StringTo(userInfo);
         // userInfo가 값이 있는 경우 body를 구성하는 코드
         body = Padding(
           padding: const EdgeInsets.all(8.0),

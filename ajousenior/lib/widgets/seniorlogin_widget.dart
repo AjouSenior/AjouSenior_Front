@@ -1,3 +1,4 @@
+import 'package:ajousenior/data/Seniordata.dart';
 import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:ajousenior/screen/seniorlogin_screen.dart';
@@ -47,6 +48,7 @@ class _SeniorLoginState extends State<SeniorLogin> {
         } else {
           print(userInfo);
           Senior a = StringTo(userInfo); //사용예시
+          SeniorData.senior = a;
           String lastTwoDigits =
               a.age_range!.substring(a.age_range!.length - 2);
           int lastTwoDigitsAsInt = int.parse(lastTwoDigits);
