@@ -56,8 +56,10 @@ class _JuniorCurrent2State extends State<JuniorCurrent2> {
                 onPressed: () {
                   // 홈 버튼을 눌렀을 때 수행할 동작
                   // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => JuniorScreen()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const JuniorScreen()));
                 },
               ),
               elevation: 2,
@@ -74,27 +76,25 @@ class _JuniorCurrent2State extends State<JuniorCurrent2> {
                   icon: const Icon(Icons.map_outlined),
                   onPressed: () {
                     // 아이콘 버튼 실행
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CurrentScreen(),
+                      ),
+                    );
                   },
                 ),
                 IconButton(
                   icon: const Icon(Icons.list_alt), // 검색 아이콘 생성
-                  onPressed: () {
-                    // 아이콘 버튼 실행
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CurrentScreen(),
-                      ),
-                    );
-                  },
+                  onPressed: () {},
                 ),
               ]),
           backgroundColor: const Color.fromARGB(255, 237, 255, 240),
           body: userInfo.isEmpty // userInfo가 비어있는 경우
               ? const Center(child: CircularProgressIndicator()) // 로딩 중 표시
               : FutureBuilder<List<Map<String, dynamic>>>(
-                  future:
-                      JuniorVolunList.juniorVolunlist(StringTo(userInfo).id),
+                  future: JuniorVolunList.lastjuniorVolunlist(
+                      StringTo(userInfo).id),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Center(
