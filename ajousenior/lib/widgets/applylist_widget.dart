@@ -14,6 +14,7 @@ class ApplyListWidget extends StatelessWidget {
     return FutureBuilder(
       future: VolunteerProviders().getList(donationid),
       builder: (context, snapshot) {
+        print(snapshot.data);
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
@@ -66,8 +67,8 @@ class ApplyListWidget extends StatelessWidget {
                                     },
                                   );
                                   if (certify == true) {
-                                    CertifyService().certify(
-                                        donationid, item.profile_nickname!);
+                                    CertifyService()
+                                        .certify(donationid, item.id!);
                                   }
                                 },
                                 child: Container(
