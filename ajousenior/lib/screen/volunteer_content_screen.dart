@@ -1,6 +1,7 @@
 import 'package:ajousenior/data/volunteer_post.dart';
 import 'package:ajousenior/provider/volunteerprovider.dart';
 import 'package:ajousenior/widgets/certify_widget.dart';
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:flutter/material.dart';
 
 class VolunteerContentScreen extends StatefulWidget {
@@ -66,7 +67,7 @@ class _VolunteerContentScreenState extends State<VolunteerContentScreen> {
                 const Expanded(
                   child: SizedBox(),
                 ),
-                const CertifyButton(),
+                CertifyWidget(donationid: widget.current.donationid),
               ],
             ),
             const Text('신청자'),
@@ -84,8 +85,9 @@ class _VolunteerContentScreenState extends State<VolunteerContentScreen> {
                   return const Text('No data');
                 } else {
                   return Column(
-                    children:
-                        snapshot.data!.map((string) => Text(string)).toList(),
+                    children: snapshot.data!
+                        .map((Senior senior) => Text(senior.profile_nickname!))
+                        .toList(),
                   );
                 }
               },

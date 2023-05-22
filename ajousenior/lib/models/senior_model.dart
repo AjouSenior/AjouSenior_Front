@@ -10,6 +10,17 @@ class Senior {
   Senior(this.profile_nickname, this.account_email, this.gender, this.age_range,
       this.seniorcenter, this.birthday, this.id);
   String split = "//";
+  factory Senior.fromJson(Map<String, dynamic>? map) {
+    return Senior(
+      map?['profile_nickname'] ?? '',
+      map?['account_email'] ?? '',
+      map?['gender'] ?? '',
+      map?['age_range'] ?? 30,
+      map?['seniorcenter'] ?? 0,
+      map?['birthday'] ?? '',
+      map?['_id'] ?? '',
+    );
+  }
   @override
   String toString() {
     // TODO: implement toString

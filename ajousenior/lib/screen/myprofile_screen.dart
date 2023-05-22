@@ -1,9 +1,38 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ajousenior/models/senior_model.dart';
 import '../widgets/logout_widget.dart';
 
-class MyProfileScreen extends StatelessWidget {
+class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
+
+  @override
+  State<MyProfileScreen> createState() => _MyProfileScreenState();
+}
+
+class _MyProfileScreenState extends State<MyProfileScreen> {
+  static var storage = const FlutterSecureStorage();
+  dynamic userInfo = '';
+  late Senior user;
+
+  @override
+  void initState() {
+    super.initState();
+    // 비동기로 flutter secure storage 정보를 불러오는 작업
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      //_asyncMethod();
+      /*if (userInfo != '') {
+        user = StringTo(userInfo);
+      }*/
+    });
+  }
+
+  Future<Senior> _asyncMethod() async {
+    // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
+    userInfo = await storage.read(key: 'login');
+    user = StringTo(userInfo);
+    return user;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +95,7 @@ class MyProfileScreen extends StatelessWidget {
                               const SizedBox(
                                 width: 16,
                               ),
+<<<<<<< HEAD
                               const Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,6 +118,45 @@ class MyProfileScreen extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ],
+=======
+                              FutureBuilder<Senior>(
+                                future: _asyncMethod(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return const CircularProgressIndicator();
+                                  } else if (snapshot.hasError) {
+                                    return Text('${snapshot.error}');
+                                  } else if (!snapshot.hasData) {
+                                    return const Text('No data');
+                                  } else {
+                                    //final user = snapshot.data!;
+                                    return Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          user.profile_nickname!,
+                                          style: const TextStyle(
+                                            fontSize: 30,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(
+                                          height: 20,
+                                        ),
+                                        Text(
+                                          user.account_email!,
+                                          style: const TextStyle(
+                                            fontSize: 25,
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                },
+>>>>>>> 28ea7766ae225b5f4102d3986e881ade3bb0a47d
                               ),
                             ],
                           ),
