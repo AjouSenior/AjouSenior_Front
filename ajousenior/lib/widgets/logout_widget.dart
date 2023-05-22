@@ -35,16 +35,16 @@ class _LogOutState extends State<LogOut> {
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.3),
-                offset: const Offset(3, 3))
+                offset: const Offset(1, 1))
           ],
           borderRadius: BorderRadius.circular(10),
           color: Theme.of(context).colorScheme.onPrimary.withOpacity(0.8),
         ),
-        height: 50,
-        width: 50,
-        child: Text('LOGOUT',
+        height: 30,
+        width: 70,
+        child: Text('로그아웃',
             style: GoogleFonts.notoSansKannada(
-              fontSize: 10,
+              fontSize: 15,
               color: Theme.of(context).colorScheme.outline,
             )),
       ),

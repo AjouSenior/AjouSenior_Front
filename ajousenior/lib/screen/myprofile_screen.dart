@@ -47,7 +47,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                       border: Border(
                         left: BorderSide(
                           width: 9.0,
-                          color: Colors.black,
+                          color: Colors.green,
                         ),
                       ),
                       color: Colors.white,
@@ -62,7 +62,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                 width: 95,
                                 height: 95,
                                 decoration: BoxDecoration(
-                                  color: Colors.blue,
+                                  color: Colors.green.withOpacity(0.5),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: const Icon(
@@ -72,26 +72,33 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                 ),
                               ),
                               const SizedBox(
-                                width: 16,
+                                width: 20,
                               ),
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    a.profile_nickname!,
+                                    '이름 : ${a.profile_nickname}',
                                     style: const TextStyle(
-                                      fontSize: 30,
+                                      fontSize: 25,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(
-                                    height: 15,
+                                    height: 5,
                                   ),
                                   Text(
-                                    a.account_email!,
+                                    '이메일 : ${a.account_email!}',
                                     style: const TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 15,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    '경로당 이름 : ${a.seniorcenter!}',
+                                    style: const TextStyle(
+                                      fontSize: 15,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
