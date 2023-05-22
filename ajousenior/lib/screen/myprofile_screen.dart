@@ -1,7 +1,11 @@
+import 'package:ajousenior/data/Seniordata.dart';
+import 'package:ajousenior/models/senior_model.dart';
+import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:ajousenior/models/senior_model.dart';
-import '../widgets/logout_widget.dart';
+
+import '../data/volunteer_post.dart';
+import '../provider/volunteerprovider.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
@@ -13,25 +17,243 @@ class MyProfileScreen extends StatefulWidget {
 class _MyProfileScreenState extends State<MyProfileScreen> {
   static var storage = const FlutterSecureStorage();
   dynamic userInfo = '';
-  late Senior user;
+
+  Widget body = const Center(
+    child: CircularProgressIndicator(),
+  );
+
+  Future<void> _asyncMethod() async {
+    // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
+    userInfo = await storage.read(key: 'login');
+    Senior a = SeniorData.senior;
+    setState(() {
+      if (a == null) {
+        body = const Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        // userInfo가 값이 있는 경우 body를 구성하는 코드
+        body = Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                height: 130,
+                width: double.maxFinite,
+                child: Card(
+                  elevation: 5,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        left: BorderSide(
+                          width: 9.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(7),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 95,
+                                height: 95,
+                                decoration: BoxDecoration(
+                                  color: Colors.green.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: const Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 80,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '이름 : ${a.profile_nickname}',
+                                    style: const TextStyle(
+                                      fontSize: 25,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(
+                                    height: 5,
+                                  ),
+                                  Text(
+                                    '이메일 : ${a.account_email!}',
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    '경로당 이름 : ${a.seniorcenter!}',
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: FutureBuilder<List<VolunteerPost>>(
+                  future: VolunteerProviders().getlastPost(a.profile_nickname),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Container(
+                              padding: const EdgeInsets.symmetric(vertical: 2),
+                              height: 130,
+                              width: double.maxFinite,
+                              child: Card(
+                                elevation: 5,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                        width: 9.0,
+                                        color: snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .members >=
+                                                snapshot
+                                                    .data![
+                                                        snapshot.data!.length -
+                                                            index -
+                                                            1]
+                                                    .max
+                                            ? Colors.red
+                                            : Colors.green,
+                                      ),
+                                    ),
+                                    color: Colors.white,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(7),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Container(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Text(
+                                                      snapshot
+                                                          .data![snapshot.data!
+                                                                  .length -
+                                                              index -
+                                                              1]
+                                                          .content,
+                                                      style: const TextStyle(
+                                                        fontSize: 20,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                          ],
+                                        ),
+                                        const Expanded(
+                                          child: SizedBox(),
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .data![snapshot.data!.length -
+                                                  index -
+                                                  1]
+                                              .place,
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          snapshot
+                                              .data![snapshot.data!.length -
+                                                  index -
+                                                  1]
+                                              .date,
+                                          style: TextStyle(
+                                            color:
+                                                Colors.black.withOpacity(0.5),
+                                          ),
+                                        ),
+                                        Text(
+                                          '신청 / 최대인원 : ${snapshot.data![snapshot.data!.length - index - 1].members} / ${snapshot.data![snapshot.data!.length - index - 1].max}',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Text('No data');
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  },
+                ),
+              ),
+              const LogOut(),
+            ],
+          ),
+        );
+      }
+    });
+  }
 
   @override
   void initState() {
     super.initState();
-    // 비동기로 flutter secure storage 정보를 불러오는 작업
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      //_asyncMethod();
-      /*if (userInfo != '') {
-        user = StringTo(userInfo);
-      }*/
+      _asyncMethod();
     });
-  }
-
-  Future<Senior> _asyncMethod() async {
-    // read 함수로 key값에 맞는 정보를 불러오고 데이터타입은 String 타입
-    userInfo = await storage.read(key: 'login');
-    user = StringTo(userInfo);
-    return user;
   }
 
   @override
@@ -53,134 +275,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                height: 130,
-                width: double.maxFinite,
-                child: Card(
-                  elevation: 5,
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        left: BorderSide(
-                          width: 9.0,
-                          color: Colors.black,
-                        ),
-                      ),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(7),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                width: 95,
-                                height: 95,
-                                decoration: BoxDecoration(
-                                  color: Colors.blue,
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: const Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 80,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              FutureBuilder<Senior>(
-                                future: _asyncMethod(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return const CircularProgressIndicator();
-                                  } else if (snapshot.hasError) {
-                                    return Text('${snapshot.error}');
-                                  } else if (!snapshot.hasData) {
-                                    return const Text('No data');
-                                  } else {
-                                    //final user = snapshot.data!;
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          user.profile_nickname!,
-                                          style: const TextStyle(
-                                            fontSize: 30,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text(
-                                          user.account_email!,
-                                          style: const TextStyle(
-                                            fontSize: 25,
-                                          ),
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ],
-                                    );
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: ListView.separated(
-                  itemCount: 3,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      height: 120,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'text',
-                            style: TextStyle(
-                              fontSize: 30,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Text(
-                            'text',
-                            style: TextStyle(
-                              color: Colors.black.withOpacity(0.5),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  separatorBuilder: (context, index) => const Divider(),
-                ),
-              ),
-              const LogOut(),
-            ],
-          ),
-        ),
+        body: body,
       ),
     );
   }
