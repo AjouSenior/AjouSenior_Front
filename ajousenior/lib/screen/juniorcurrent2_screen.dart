@@ -1,18 +1,19 @@
 import 'package:ajousenior/screen/junior_screen.dart';
-import 'package:ajousenior/screen/juniorcurrent2_screen.dart';
+import 'package:ajousenior/screen/juniorcurrent_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 import '../models/senior_model.dart';
 import '../services/junior_volunteerlist.dart';
 
-class CurrentScreen extends StatefulWidget {
-  const CurrentScreen({super.key});
+class JuniorCurrent2 extends StatefulWidget {
+  const JuniorCurrent2({super.key});
 
   @override
-  State<CurrentScreen> createState() => _CurrentScreenState();
+  State<JuniorCurrent2> createState() => _JuniorCurrent2State();
 }
 
-class _CurrentScreenState extends State<CurrentScreen> {
+class _JuniorCurrent2State extends State<JuniorCurrent2> {
   final List<Color> colorList = [
     const Color.fromARGB(147, 94, 222, 102),
     const Color.fromARGB(200, 76, 181, 222),
@@ -55,10 +56,8 @@ class _CurrentScreenState extends State<CurrentScreen> {
                 onPressed: () {
                   // 홈 버튼을 눌렀을 때 수행할 동작
                   // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const JuniorScreen()));
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => JuniorScreen()));
                 },
               ),
               elevation: 2,
@@ -84,7 +83,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const JuniorCurrent2(),
+                        builder: (context) => CurrentScreen(),
                       ),
                     );
                   },
