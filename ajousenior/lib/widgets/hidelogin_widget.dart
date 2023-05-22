@@ -1,9 +1,12 @@
 // 승수//seungsu8826@naver.com//null//AgeRange.age_20_29//우만주공1단지경로당//0311//643a5d66fbc5fd3feb88cfc5
 
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/screen/junior_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../data/Seniordata.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -26,6 +29,8 @@ class _LoginWidgetState extends State<LoginWidget> {
 
     return GestureDetector(
       onTap: () {
+        SeniorData.senior = StringTo(
+            '승수//seungsu8826@naver.com//null//AgeRange.age_20_29//우만주공2단지경로당//0311//645225a92229f4c11b87b592');
         logIn();
         print("로그인 성공");
         Navigator.push(

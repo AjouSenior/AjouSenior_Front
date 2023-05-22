@@ -1,3 +1,5 @@
+import 'package:ajousenior/data/Seniordata.dart';
+import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/screen/senior_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,6 +27,10 @@ class _LoginWidget2State extends State<LoginWidget2> {
             '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공2단지경로당//0415//' +
                 id,
       );
+      // ignore: prefer_interpolation_to_compose_strings
+      SeniorData.senior = StringTo(
+          '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공2단지경로당//0415//' +
+              id);
     }
 
     return GestureDetector(
