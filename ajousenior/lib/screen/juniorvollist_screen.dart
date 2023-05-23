@@ -3,6 +3,7 @@ import 'package:ajousenior/services/volunteerlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:ajousenior/screen/map_sample.dart';
+
 import '../models/senior_model.dart';
 import '../services/junior_postvolunteer.dart';
 
@@ -69,86 +70,123 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        return false; // 뒤로가기 버튼을 무시하고 아무 동작도 하지 않음
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.home),
-            onPressed: () {
-              // 홈 버튼을 눌렀을 때 수행할 동작
-              // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const JuniorScreen()));
-            },
-          ),
-          title: const Text('재능기부 선택'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.map_outlined),
+        onWillPop: () async {
+          return false; // 뒤로가기 버튼을 무시하고 아무 동작도 하지 않음
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.home),
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MapScreen()),
-                );
+                // 홈 버튼을 눌렀을 때 수행할 동작
+                // 예를 들어, 홈 화면으로 이동하는 코드를 작성할 수 있습니다.
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const JuniorScreen()));
               },
             ),
-            IconButton(
-              icon: const Icon(Icons.list_alt),
-              onPressed: () {
-                print('리스트 화면으로 전환');
-              },
-            ),
-          ],
-        ),
-        body: ListView.builder(
-          itemCount: locations.length,
-          itemBuilder: (context, index) {
-            final location = locations[index];
-            return Card(
-              child: Column(
-                children: [
-                  Text(
-                    location['seniorcenter'],
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                  Text("내용 : " + location['content']),
-                  Text("시간 : "
-                      "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분"),
-                  Text("최대 인원: ${location['maxpeople']}"),
-                  Text("현재 인원: ${location['currentpeople']}"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      if (location['currentpeople'] <= location['maxpeople'])
-                        ElevatedButton(
-                          onPressed: () async {
-                            Senior a = StringTo(userInfo);
-                            print(userInfo);
-                            final apply = await _showApplyDialog();
-                            if (apply == true) {
-                              JuniorPostVolunteer.sendVolunteer(location['_id'],
-                                  a.id, location['currentpeople'].toString());
-                              Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          super.widget));
-                            }
-                          },
-                          child: const Text('신청'),
-                        ),
-                    ],
-                  ),
-                ],
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.green,
+            title: const Text('        재능기부 리스트'),
+            actions: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.map_outlined),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                  );
+                },
               ),
-            );
-          },
-        ),
-      ),
-    );
+              IconButton(
+                icon: const Icon(Icons.list_alt),
+                onPressed: () {
+                  print('리스트 화면으로 전환');
+                },
+              ),
+            ],
+          ),
+          backgroundColor: const Color.fromARGB(255, 237, 255, 240),
+          body: ListView.builder(
+              itemCount: locations.length,
+              itemBuilder: (context, index) {
+                final location = locations[index];
+                return ListTile(
+                  title: Container(
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        left: BorderSide(
+                          width: 9.0,
+                          color: Colors.green,
+                        ),
+                      ),
+                      color: Colors.white,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(7),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                location['seniorcenter'],
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text("내용 : " + location['content']),
+                              Text("시간 : "
+                                  "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분"),
+                              Text("최대 인원: ${location['maxpeople']}"),
+                              Text("현재 인원: ${location['currentpeople']}"),
+                            ],
+                          ),
+                          if (location['currentpeople'] < location['maxpeople'])
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                        Colors.green), // 배경색 변경
+                              ),
+                              onPressed: () async {
+                                Senior a = StringTo(userInfo);
+                                print(userInfo);
+                                final apply = await _showApplyDialog();
+                                if (apply == true) {
+                                  JuniorPostVolunteer.sendVolunteer(
+                                      location['_id'],
+                                      a.id,
+                                      location['currentpeople'].toString());
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              super.widget));
+                                }
+                              },
+                              child: const Text('신청'),
+                            )
+                          else
+                            ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Colors.red), // 배경색 변경
+                                ),
+                                onPressed: () async {},
+                                child: const Text('인원 초과'))
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              }),
+        ));
   }
 }

@@ -9,6 +9,8 @@ import 'package:ajousenior/models/senior_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 
+import '../data/date.dart';
+
 class SeniorVolunteerScreen extends StatefulWidget {
   const SeniorVolunteerScreen({super.key});
   @override
@@ -56,18 +58,18 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                         builder: (context) => const SeniorScreen()));
               },
             ),
-            title: const Text('                 재능기부 선택'),
+            title: const Text('           전체 재능 기부'),
             backgroundColor: Colors.white,
             foregroundColor: Colors.green,
             actions: <Widget>[
               IconButton(
-                icon: const Icon(Icons.verified_user_outlined),
+                icon: const Icon(Icons.list),
                 onPressed: () {
                   // 아이콘 버튼 실행
                 },
               ),
               IconButton(
-                icon: const Icon(Icons.verified_user_outlined), // 검색 아이콘 생성
+                icon: const Icon(Icons.person_outline), // 검색 아이콘 생성
                 onPressed: () {
                   // 아이콘 버튼 실행
                   Navigator.push(
@@ -193,9 +195,9 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  snapshot
+                                  DateConverter.convertToKorean(snapshot
                                       .data![snapshot.data!.length - index - 1]
-                                      .date,
+                                      .date),
                                   style: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                   ),

@@ -45,7 +45,7 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
         foregroundColor: Colors.green,
         title: const Center(
           child: Text(
-            "Senior App",
+            "신청",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
           ),
         ),
@@ -57,8 +57,8 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
           children: [
             AdvancedTextField(
               controller: contentarea,
-              labelText: 'content',
-              hintText: 'content',
+              labelText: '내용',
+              hintText: '내용',
             ),
             /*const SizedBox(
               height: 10,
@@ -79,15 +79,15 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
               controller: memberarea,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'members',
-                hintText: 'members',
+                labelText: '인원 수',
+                hintText: '인원 수',
               ),
             ),
             const SizedBox(
               height: 20,
             ),
             const Text(
-              'Date',
+              '날짜',
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
             ),
             const SizedBox(
@@ -120,7 +120,7 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
                       });
                     }
                   },
-                  child: const Text('select'),
+                  child: const Text('날짜 선택'),
                 ),
               ],
             ),
@@ -163,7 +163,7 @@ class _VolunteerPostScreenState extends State<VolunteerPostScreen> {
                       throw Exception('post failed');
                     }
                   },
-                  child: const Text("post"),
+                  child: const Text("신청"),
                 ),
               ],
             ),

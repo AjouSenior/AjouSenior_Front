@@ -38,15 +38,15 @@ class _SeniorScreenState extends State<SeniorScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'Temp',
+            label: '설정',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: '홈',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: '프로필',
           ),
         ],
       ),

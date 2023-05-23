@@ -3,6 +3,7 @@ import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:ajousenior/data/date.dart';
 
 import '../data/volunteer_post.dart';
 import '../provider/volunteerprovider.dart';
@@ -39,15 +40,27 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(vertical: 5),
-                height: 130,
+                height: 135,
                 width: double.maxFinite,
                 child: Card(
                   elevation: 5,
                   child: Container(
                     decoration: const BoxDecoration(
                       border: Border(
+                        top: BorderSide(
+                          width: 3.0,
+                          color: Colors.green,
+                        ),
+                        right: BorderSide(
+                          width: 3.0,
+                          color: Colors.green,
+                        ),
+                        bottom: BorderSide(
+                          width: 3.0,
+                          color: Colors.green,
+                        ),
                         left: BorderSide(
-                          width: 9.0,
+                          width: 3.0,
                           color: Colors.green,
                         ),
                       ),
@@ -82,22 +95,22 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                   Text(
                                     '이름 : ${a.profile_nickname}',
                                     style: const TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 20,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   const SizedBox(
-                                    height: 5,
+                                    height: 8,
                                   ),
                                   Text(
-                                    '이메일 : ${a.account_email!}',
+                                    '이메일 :  ${a.account_email!}',
                                     style: const TextStyle(
                                       fontSize: 15,
                                     ),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                   Text(
-                                    '경로당 이름 : ${a.seniorcenter!}',
+                                    '경로당 이름 :  ${a.seniorcenter!}',
                                     style: const TextStyle(
                                       fontSize: 15,
                                     ),
@@ -208,11 +221,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          snapshot
+                                          DateConverter.convertToKorean(snapshot
                                               .data![snapshot.data!.length -
                                                   index -
                                                   1]
-                                              .date,
+                                              .date),
                                           style: TextStyle(
                                             color:
                                                 Colors.black.withOpacity(0.5),
@@ -270,7 +283,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
           foregroundColor: Colors.green,
           title: const Center(
             child: Text(
-              "Senior App",
+              "S E N A",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
           ),

@@ -20,7 +20,7 @@ class SeniorHomeScreen extends StatelessWidget {
           foregroundColor: Colors.green,
           title: const Center(
             child: Text(
-              "Senior App",
+              "S E N A",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
           ),

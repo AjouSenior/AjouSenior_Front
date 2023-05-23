@@ -30,13 +30,16 @@ class _MapScreenState extends State<MapScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text("신청하시겠습니까?"),
+          title: const Text(
+            "신청하시겠습니까?",
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
           content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                location['seniorcenter'],
-                style: const TextStyle(fontSize: 20),
+                "장소 : " + location['seniorcenter'],
               ),
               Text("내용 : " + location['content']),
               Text("시간 : "
@@ -47,12 +50,12 @@ class _MapScreenState extends State<MapScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text("신청"),
-              onPressed: () => Navigator.of(context).pop(true),
-            ),
-            TextButton(
               child: const Text("취소"),
               onPressed: () => Navigator.of(context).pop(false),
+            ),
+            TextButton(
+              child: const Text("신청"),
+              onPressed: () => Navigator.of(context).pop(true),
             ),
           ],
         );
@@ -69,13 +72,13 @@ class _MapScreenState extends State<MapScreen> {
         markerId: MarkerId(location['seniorcenter']),
         position: position,
         infoWindow: InfoWindow(
-          title: location['seniorcenter'] +
-              " "
-                  "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분",
+          title: location['seniorcenter'],
+          //     +" "
+          //         "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분",
           snippet: location['content'],
           onTap: () async {
             print("포스트실행");
-            if (location['currentpeople'] <= location['maxpeople']) {
+            if (location['currentpeople'] < location['maxpeople']) {
               Senior a = StringTo(userInfo);
               final apply = await _showApplyDialog(location);
               print("다이아로그실행완료");
@@ -87,6 +90,24 @@ class _MapScreenState extends State<MapScreen> {
                     MaterialPageRoute(
                         builder: (BuildContext context) => super.widget));
               }
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('안내'),
+                    content: const Text('신청인원이 다 찼습니다.'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text('확인'),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
           },
         ),
@@ -137,7 +158,9 @@ class _MapScreenState extends State<MapScreen> {
                         builder: (context) => const JuniorScreen()));
               },
             ),
-            title: const Text('재능기부 선택'),
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.green,
+            title: const Text('          재능기부 맵'),
             actions: <Widget>[
               IconButton(
                 icon: const Icon(Icons.map_outlined),
