@@ -51,14 +51,11 @@ class _SeniorLoginScreenState extends State<SeniorLoginScreen> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
               const SizedBox(
                 height: 80,
-              ),
-              ElevatedButton(
-                  child: Image.asset(
-                    'assets/kakaopic.png',
-                    width: 170, // 원하는 너비
-                    height: 40, // 원하는 높이
-                    fit: BoxFit.cover, // 이미지 비율을 유지하면서 모든 내용이 보이도록 조정
-                  ),
+              ), //assets/kakaopic.png
+              IconButton(
+                  icon: Image.asset('assets/kakaopic.png'),
+                  iconSize: 150,
+                  style: const ButtonStyle(),
                   onPressed: () async {
                     if (await isKakaoTalkInstalled()) {
                       try {
