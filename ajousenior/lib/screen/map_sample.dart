@@ -25,19 +25,33 @@ class _MapScreenState extends State<MapScreen> {
     userInfo = await storage.read(key: 'login');
   }
 
-  Future<bool?> _showApplyDialog() async {
+  Future<bool?> _showApplyDialog(Map<String, dynamic> location) async {
     return showDialog<bool>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("신청하시겠습니까?"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                location['seniorcenter'],
+                style: const TextStyle(fontSize: 20),
+              ),
+              Text("내용 : " + location['content']),
+              Text("시간 : "
+                  "${DateTime.parse(location['date']).month}월${DateTime.parse(location['date']).day}일${DateTime.parse(location['date']).hour}시${DateTime.parse(location['date']).minute}분"),
+              Text("최대 인원: ${location['maxpeople']}"),
+              Text("현재 인원: ${location['currentpeople']}")
+            ],
+          ),
           actions: <Widget>[
             TextButton(
-              child: const Text("예"),
+              child: const Text("신청"),
               onPressed: () => Navigator.of(context).pop(true),
             ),
             TextButton(
-              child: const Text("아니오"),
+              child: const Text("취소"),
               onPressed: () => Navigator.of(context).pop(false),
             ),
           ],
@@ -63,11 +77,15 @@ class _MapScreenState extends State<MapScreen> {
             print("포스트실행");
             if (location['currentpeople'] <= location['maxpeople']) {
               Senior a = StringTo(userInfo);
-              final apply = await _showApplyDialog();
+              final apply = await _showApplyDialog(location);
               print("다이아로그실행완료");
               if (apply == true) {
                 JuniorPostVolunteer.sendVolunteer(location['_id'], a.id,
                     location['currentpeople'].toString());
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) => super.widget));
               }
             }
           },

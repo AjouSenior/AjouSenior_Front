@@ -73,7 +73,7 @@ class _JuniorCurrent2State extends State<JuniorCurrent2> {
               ),
               actions: <Widget>[
                 IconButton(
-                  icon: const Icon(Icons.map_outlined),
+                  icon: const Icon(Icons.list),
                   onPressed: () {
                     // 아이콘 버튼 실행
                     Navigator.push(
@@ -85,7 +85,7 @@ class _JuniorCurrent2State extends State<JuniorCurrent2> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.list_alt), // 검색 아이콘 생성
+                  icon: const Icon(Icons.check_box_outlined), // 검색 아이콘 생성
                   onPressed: () {},
                 ),
               ]),

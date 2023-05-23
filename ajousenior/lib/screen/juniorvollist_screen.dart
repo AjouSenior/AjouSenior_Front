@@ -132,6 +132,11 @@ class _VolunteerListScreenState extends State<VolunteerListScreen> {
                             if (apply == true) {
                               JuniorPostVolunteer.sendVolunteer(location['_id'],
                                   a.id, location['currentpeople'].toString());
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          super.widget));
                             }
                           },
                           child: const Text('신청'),
