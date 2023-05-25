@@ -67,8 +67,8 @@ class ApplyListWidget extends StatelessWidget {
                                     },
                                   );
                                   if (certify == true) {
-                                    CertifyService()
-                                        .certify(donationid, item.id!);
+                                    CertifyService(context)
+                                        .certify(donationid, item);
                                   }
                                 },
                                 child: Container(
