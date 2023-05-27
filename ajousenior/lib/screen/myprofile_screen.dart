@@ -3,7 +3,6 @@ import 'package:ajousenior/models/senior_model.dart';
 import 'package:ajousenior/widgets/logout_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:ajousenior/data/date.dart';
 
 import '../data/volunteer_post.dart';
 import '../provider/volunteerprovider.dart';
@@ -221,11 +220,11 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          DateConverter.convertToKorean(snapshot
+                                          snapshot
                                               .data![snapshot.data!.length -
                                                   index -
                                                   1]
-                                              .date),
+                                              .date,
                                           style: TextStyle(
                                             color:
                                                 Colors.black.withOpacity(0.5),

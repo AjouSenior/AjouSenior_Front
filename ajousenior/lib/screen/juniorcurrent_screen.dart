@@ -66,7 +66,7 @@ class _CurrentScreenState extends State<CurrentScreen> {
               foregroundColor: Colors.green,
               title: const Center(
                 child: Text(
-                  "Junior App",
+                  "신청 현황",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
                 ),
               ),

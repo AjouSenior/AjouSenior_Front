@@ -67,7 +67,7 @@ class _JuniorCurrent2State extends State<JuniorCurrent2> {
               foregroundColor: Colors.green,
               title: const Center(
                 child: Text(
-                  "Junior App",
+                  "인증된 커리어",
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
                 ),
               ),

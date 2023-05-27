@@ -20,7 +20,7 @@ class JuniorScreen extends StatelessWidget {
           foregroundColor: Colors.green,
           title: const Center(
             child: Text(
-              "Junior App",
+              "S E N A",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w400),
             ),
           ),
