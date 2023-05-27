@@ -13,6 +13,7 @@ class VolunteerProviders {
       final responseJson = json.decode(response.body);
       for (var posts in responseJson['data']) {
         entries.add(VolunteerPost.fromJson(posts));
+        print(posts);
       }
       //print(entries[0].members);
       return entries;
@@ -36,6 +37,7 @@ class VolunteerProviders {
       final responseJson = json.decode(response.body);
       for (var posts in responseJson['data']) {
         entries.add(VolunteerPost.fromJson(posts));
+        print(posts);
       }
       return entries;
     } else {

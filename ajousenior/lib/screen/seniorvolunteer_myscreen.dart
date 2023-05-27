@@ -8,8 +8,6 @@ import 'package:ajousenior/provider/volunteerprovider.dart';
 import 'package:ajousenior/widgets/volunteer_onrecruit_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../data/date.dart';
-
 class SeniorMyScreen extends StatefulWidget {
   final Senior user;
   const SeniorMyScreen({super.key, required this.user});
@@ -192,9 +190,9 @@ class _SeniorMyScreenState extends State<SeniorMyScreen> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  DateConverter.convertToKorean(snapshot
+                                  snapshot
                                       .data![snapshot.data!.length - index - 1]
-                                      .date),
+                                      .date,
                                   style: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                   ),

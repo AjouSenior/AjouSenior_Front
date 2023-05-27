@@ -9,8 +9,6 @@ import 'package:ajousenior/models/senior_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter/material.dart';
 
-import '../data/date.dart';
-
 class SeniorVolunteerScreen extends StatefulWidget {
   const SeniorVolunteerScreen({super.key});
   @override
@@ -195,9 +193,12 @@ class _SeniorVolunteerScreenState extends State<SeniorVolunteerScreen> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
-                                  DateConverter.convertToKorean(snapshot
+                                  // DateConverter.convertToKorean(snapshot
+                                  //     .data![snapshot.data!.length - index - 1]
+                                  //     .date)
+                                  snapshot
                                       .data![snapshot.data!.length - index - 1]
-                                      .date),
+                                      .date,
                                   style: TextStyle(
                                     color: Colors.black.withOpacity(0.5),
                                   ),
