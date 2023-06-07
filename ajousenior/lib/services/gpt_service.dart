@@ -19,8 +19,8 @@ class GptService {
       body: jsonEncode({
         "model": "text-davinci-003",
         "prompt": message,
-        "max_tokens": 200,
-        "temperature": 0.8
+        "max_tokens": 1500,
+        "temperature": 0.9
       }),
     );
 

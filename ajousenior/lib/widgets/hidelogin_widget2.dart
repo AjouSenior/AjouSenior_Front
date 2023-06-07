@@ -20,16 +20,16 @@ class _LoginWidget2State extends State<LoginWidget2> {
   Widget build(BuildContext context) {
     logIn() async {
       final id = await LoginService.sendLogin('시니어', 'senior@naver.com', 'null',
-          'AgeRange.age_60_69', '우만주공2단지경로당', '0415');
+          'AgeRange.age_60_69', '우만주공1단지경로당', '0415');
       storage.write(
         key: 'login',
         value:
-            '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공2단지경로당//0415//' +
+            '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공1단지경로당//0415//' +
                 id,
       );
       // ignore: prefer_interpolation_to_compose_strings
       SeniorData.senior = StringTo(
-          '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공2단지경로당//0415//' +
+          '시니어//senior@naver.com//null//AgeRange.age_60_69//우만주공1단지경로당//0415//' +
               id);
     }
 
